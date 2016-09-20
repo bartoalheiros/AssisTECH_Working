@@ -1,11 +1,21 @@
 package br.ufrpe.assistec.beans;
 
 public class OrdemServico {
+	
+	private String numero;
     private Cliente cliente;
-    private Equipamento equipto;
+    private Equipamento equipamento;
     private String dataEntrada;
     private String dataEntrega;
-    private String horarioEntrada;
+    
+    
+    public String getNumero() {
+    	return this.numero;
+    }
+    
+    public void setNumero(String numero) {
+    	this.numero = numero;
+    }
     
     public Cliente getCliente() {
 		return cliente;
@@ -15,16 +25,14 @@ public class OrdemServico {
 		this.cliente = cliente;
 	}
 
-	public Equipamento getEquipto() {
-		return equipto;
+	public Equipamento getEquipamento() {
+		return this.equipamento;
 	}
 
-	public void setEquipto(Equipamento equipto) {
-		this.equipto = equipto;
+	public void setEquipto(Equipamento equipamento) {
+		this.equipamento = equipamento;
 	}
 
-	private String horarioEntrega;
-    
 	public String getDataEntrada() {
 		return dataEntrada;
 	}
@@ -41,19 +49,16 @@ public class OrdemServico {
 		this.dataEntrega = dataEntrega;
 	}
 	
-	public String getHorarioEntrada() {
-		return horarioEntrada;
+	public boolean equals(OrdemServico ordem) {
+		boolean resultado = false;
+		if(ordem.getNumero().equals(this.numero)) {
+			resultado = true;
+		}
+		
+		return resultado;
 	}
 	
-	public void setHorarioEntrada(String horarioEntrada) {
-		this.horarioEntrada = horarioEntrada;
-	}
-	
-	public String getHorarioEntrega() {
-		return horarioEntrega;
-	}
-	
-	public void setHorarioEntrega(String horarioEntrega) {
-		this.horarioEntrega = horarioEntrega;
+	public String toString() {
+		return "Número: " + "\n" + this.numero + "Data: " + this.dataEntrada + "\n" + this.cliente.toString() + "Equipamento: \n" + this.equipamento.toString();
 	}
 }
