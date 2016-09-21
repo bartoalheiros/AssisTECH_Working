@@ -4,7 +4,12 @@ public class Cliente extends Usuario {
 	
 	private Equipamento equipamento;
 	private String endereco;
+	private String cpf;
     
+	public Cliente () {
+		
+	}
+	
 	public String getEndereco() {
 		return this.endereco;
 	}
@@ -13,8 +18,12 @@ public class Cliente extends Usuario {
 		this.endereco = endereco;
 	}
 	
+	public void setEquipamento (Equipamento equipamento) {
+		this.equipamento = equipamento;
+	}
+	
 	public String toString() {
-		return super.toString() + "Equipamento: " + this.equipamento;
+		return super.toString() + "Equipamento: " + "\n" + this.equipamento.toString();
 	}
 
 	

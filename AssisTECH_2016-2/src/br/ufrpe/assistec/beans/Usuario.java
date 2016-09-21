@@ -34,6 +34,6 @@ public class Usuario {
     }
     
     public String toString() {
-    	return "Nome: " + this.nome + "\n" + "Email: " + this.email + "\n" + "Telefone: " + this.telefone;
+    	return "Nome: " + this.nome + "\n" + "Email: " + this.email + "\n" + "Telefone: " + this.telefone + "\n\n";
     }
 }

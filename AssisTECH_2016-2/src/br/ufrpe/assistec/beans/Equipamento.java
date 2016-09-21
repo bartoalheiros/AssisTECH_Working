@@ -25,7 +25,7 @@ public class Equipamento {
 	}
     
 	public String toString() {
-		return "Tipo: " + this.tipo + "Número de Série: " + this.numeroSerie + "Relatório do Defeito: " + this.caracteristicasDefeito;
+		return "Tipo: " + this.tipo + "\n" + "Número de Série: " + this.numeroSerie + "\n" + "Relatório do Defeito: " + this.caracteristicasDefeito;
 	}
     
 }
