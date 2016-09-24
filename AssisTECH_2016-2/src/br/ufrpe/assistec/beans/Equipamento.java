@@ -4,6 +4,7 @@ public class Equipamento {
     private String tipo;
     private String numeroSerie;
     private String caracteristicasDefeito;
+    private String relatorioDeManutencao;
 	
     public String getTipo() {
 		return tipo;
@@ -22,6 +23,14 @@ public class Equipamento {
 	}
 	public void setCaracteristicasDefeito(String caracteristicasDefeito) {
 		this.caracteristicasDefeito = caracteristicasDefeito;
+	}
+	
+	public String getRelatorioDeManutencao() {
+		return this.relatorioDeManutencao;
+	}
+	
+	public void modificarRelatorioDeManutencao(String relatorioDeManutencao) {
+		this.relatorioDeManutencao = this.relatorioDeManutencao + " " + relatorioDeManutencao; //concatena a String recebida de relatorio e acrescenta à antiga.
 	}
     
 	public String toString() {

@@ -7,17 +7,27 @@ public class OrdemServico {
 	private Equipamento equipamento;
 	private String dataEntrada;
 	private String dataEntrega;
+	private String portador; //A pessoa que recebeu o equipamento, das mãos do cliente, na entrada.
+	private String prioridade;
 
 
 	public String getNumero() {
 		return this.numero;
 	}
-
+	
 	public void setNumero(String numero) {
 		this.numero = numero;
 	}
+	
+	public String getPrioridade() {
+		return prioridade;
+	}
 
-	public Cliente getCliente() {
+	public void setPrioridade(String prioridade) {
+		this.prioridade = prioridade;
+	}
+
+    public Cliente getCliente() {
 		return this.cliente;
 	}
 
@@ -59,6 +69,10 @@ public class OrdemServico {
 	}
 
 	public String toString() {
-		return "Número: " + "\n" + this.numero + "Data: " + this.dataEntrada + "\n" + this.cliente.toString() + "Equipamento: \n" + this.equipamento.toString();
+		return "Número: " + "\n" + this.numero + "Data: " + this.dataEntrada + "\n" + "Quem recebeu: " + this.portador + "\n\n" + this.cliente.toString() + "Equipamento: \n" + this.equipamento.toString();
+	}
+	
+	public String toStringPrioridades() {
+		return "Cliente: " + "  " + "OS no: " + "Data de Abertura" + "Equipamento" + "Prioridade" + "\n" + this.cliente.getNome() + "  " + this.numero + "  " + this.dataEntrada + "  " + this.equipamento.getTipo() + "  " + this.prioridade; 
 	}
 }

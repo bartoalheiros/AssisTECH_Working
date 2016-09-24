@@ -10,6 +10,10 @@ public class Cliente extends Usuario {
 		
 	}
 	
+	public String getCpf() {
+		return this.cpf;
+	}
+	
 	public String getEndereco() {
 		return this.endereco;
 	}
@@ -23,7 +27,7 @@ public class Cliente extends Usuario {
 	}
 	
 	public String toString() {
-		return super.toString() + "Equipamento: " + "\n" + this.equipamento.toString();
+		return super.toString() + "                 Equipamento" + "\n\n" + this.equipamento.toString();
 	}
 
 	
