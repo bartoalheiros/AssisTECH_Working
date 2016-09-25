@@ -57,7 +57,7 @@ public class OrdemServico {
 		return this.equipamento;
 	}
 
-	public void setEquipto(Equipamento equipamento) {
+	public void setEquipamento(Equipamento equipamento) {
 		this.equipamento = equipamento;
 	}
 
@@ -107,7 +107,7 @@ public class OrdemServico {
 	
 	@Override
 	public String toString() {
-		return "Número: " + this.numero +"\n" + "Data: " + this.dataEntrada + "\n" + "Portador: " + this.nomePortador + "\n\n" + this.cliente.toString() + "                 Equipamento" + "\n\n" + this.equipamento.toString() + "\n" + "Características do Defeito: \n" + this.getCaracteristicasDefeito() + "\n\n" + "Técnico Responsável" + "\n"  + this.tecnicoResponsavel.toString() + "\n\n" + "Relatório de Manutenção" + "\n" + this.relatorioDeManutencao;
+		return "Número: " + this.numero +"\n" + "Data: " + this.dataEntrada + "\n" + "Portador: " + this.nomePortador + "\n\n" + this.cliente.toString() + "                 Equipamento" + "\n\n" + this.equipamento.toString() + "\n" + "Características do Defeito: \n" + this.getCaracteristicasDefeito() + "\n\n" + "Técnico Responsável" + "\n"  + this.tecnicoResponsavel.toString() + "\n\n" + "Relatório de Manutenção" + "\n" + this.relatorioDeManutencao + "\n\n";
 	}
 	
 	public String toStringPrioridades() {

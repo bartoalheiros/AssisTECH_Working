@@ -29,7 +29,7 @@ public class Demo {
 		
 		
 		ordemServico.setCliente(cliente);
-		ordemServico.setEquipto(equipamento);
+		ordemServico.setEquipamento(equipamento);
 		ordemServico.setTecnicoResponsavel(tecnico);
 		ordemServico.setNumero("123456");
 		ordemServico.setDataEntrada("24/09/2016");

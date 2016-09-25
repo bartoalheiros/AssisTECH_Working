@@ -3,7 +3,9 @@ package br.ufrpe.assistec.programas;
 import java.util.Scanner;
 
 import br.ufrpe.assistec.beans.Cliente;
+import br.ufrpe.assistec.beans.Equipamento;
 import br.ufrpe.assistec.beans.OrdemServico;
+import br.ufrpe.assistec.beans.Tecnico;
 import br.ufrpe.assistec.repositorios.RepositorioOrdensServico;
 
 public class Programa {
@@ -35,6 +37,7 @@ public class Programa {
 
 			//instanciando um novo livro, preenchendo e guardando no repositórioLivros...  
 			case "1":
+				//Dados iniciais
 				OrdemServico ordem = new OrdemServico();	
 				System.out.println("Número: \n");
 				String no = input.nextLine();
@@ -42,7 +45,7 @@ public class Programa {
 				ordem.setNumero(no);;
 
 
-				System.out.println("Abertura: \n");
+				System.out.println("Data de Entrada: \n");
 				String data = input.nextLine();
 				ordem.setDataEntrada(data);;
 				input.nextLine(); //Limpa o buffer do teclado
@@ -52,23 +55,83 @@ public class Programa {
 				input.nextLine(); //Limpa o buffer do teclado
 				ordem.setPortador(portador);
 				
+				//Cadastrando o Cliente
 				Cliente cliente = new Cliente();
+				System.out.printf("Dados do Cliente\n\n");
 				
+				System.out.println("Nome: ");
+				String nome = input.nextLine();
+				input.nextLine(); //Limpa o buffer do teclado
+				cliente.setNomeCompleto(nome);
 				
+				System.out.println("Email: ");
+				String email = input.nextLine();
+				input.nextLine(); //Limpa o buffer do teclado
+				cliente.setEmail(email);
 				
-				repositorio.inserir(liv);
+				System.out.println("Telefone: ");
+				String telefone = input.nextLine();
+				cliente.setTelefone(telefone);
+				ordem.setCliente(cliente);
+				input.nextLine(); //Limpa o buffer do teclado
+				
+				//Cadastrando Equipamento
+				Equipamento equipto = new Equipamento();
+				System.out.printf("Dados do equipamento\n\n");
+				
+				System.out.println("Tipo: ");
+				String tipo = input.nextLine();
+				input.nextLine(); //Limpa o buffer do teclado
+				equipto.setTipo(tipo);
+				
+				System.out.println("No de Série: ");
+				String noSerie = input.nextLine();
+				input.nextLine(); //Limpa o buffer do teclado
+				equipto.setNumeroSerie(noSerie);
+				
+				ordem.setEquipamento(equipto);
+				
+				//Fim do cadastro do equipamento, continuando a construir a ordem
+				
+				System.out.println("Características do Defeito: ");
+				String caracDefeito = input.nextLine();
+				input.nextLine(); //Limpa o buffer do teclado
+				ordem.setCaracteristicasDefeito(caracDefeito);
+				
+				//Cadastrando Técnico
+				Tecnico tecnico = new Tecnico();
+				System.out.printf("Informações do Técnico\n\n");
+				
+				System.out.println("Nome Completo: ");
+				String nomeTecnico = input.nextLine();
+				input.nextLine(); //Limpa o buffer do teclado
+			    tecnico.setNomeCompleto(nomeTecnico);
+			    
+			    System.out.println("Email: ");
+			    String emailTecnico = input.nextLine();
+			    input.nextLine(); //Limpa o buffer do teclado
+			    tecnico.setEmail(emailTecnico);
+			    
+			    System.out.println("Telefone: ");
+			    String telefoneTecnico = input.nextLine();
+			    input.nextLine(); //Limpa o buffer do teclado
+			    tecnico.setTelefone(telefoneTecnico);
+			    
+			    ordem.setTecnicoResponsavel(tecnico);
+			    
+			    System.out.println("Relatório de Manutenção: ");
+				String relatorio = input.nextLine();
+				input.nextLine(); //Limpa o buffer do teclado
+				ordem.setRelatorioDeManutencao(relatorio);
+				
+				repositorioOS.cadastrarOS(ordem);
 				break;
 
 			case "2":
-				System.out.println("Digite o código do livro que deseja remover: ");
-				codigo = input.nextLine();
-				boolean resultadoRemover = repositorio.removerLivro(codigo);
-				if(resultadoRemover == false){
-					System.out.println("Livro não existe.");
-				}
+				repositorioOS.listarOrdens();
 				break;
 
-			case "3":
+			/*case "3":
 				System.out.println("Digite o código do livro: ");
 				codigo = input.nextLine();
 				input.nextLine(); //Limpa o buffer do teclado
@@ -88,7 +151,7 @@ public class Programa {
 			
 			case "5":
 				repositorio.listar();
-				break;
+				break;*/
 
 			default: 
 				System.out.println("Digite uma opção válida.");
@@ -106,4 +169,4 @@ public class Programa {
 
 	}
 
-}
+//}
