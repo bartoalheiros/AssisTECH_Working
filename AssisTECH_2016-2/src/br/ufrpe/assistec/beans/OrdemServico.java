@@ -5,12 +5,30 @@ public class OrdemServico {
 	private String numero;
 	private Cliente cliente;
 	private Equipamento equipamento;
+	private Tecnico tecnicoResponsavel;
 	private String dataEntrada;
 	private String dataEntrega;
-	private String portador; //A pessoa que recebeu o equipamento, das mãos do cliente, na entrada.
+	private String nomePortador; //O portador é A pessoa que recebeu o equipamento, das mãos do cliente, na entrada. Que será um funcionário da loja: técnico ou atendente.
 	private String prioridade;
+	private String caracteristicasDefeito;
+    private String relatorioDeManutencao;
 
-
+	public void setTecnicoResponsavel(Tecnico tecnico) {
+		this.tecnicoResponsavel = tecnico;
+	}
+	
+	public Tecnico getTecnicoResponsavel() {
+		return this.tecnicoResponsavel;
+	}
+    
+    public void setPortador(String nomePortador) {
+		this.nomePortador = nomePortador;
+	}
+	
+	public String getPortador() {
+		return this.nomePortador;
+	}
+	
 	public String getNumero() {
 		return this.numero;
 	}
@@ -58,6 +76,25 @@ public class OrdemServico {
 	public void setDataEntrega(String dataEntrega) {
 		this.dataEntrega = dataEntrega;
 	}
+	
+	public String getCaracteristicasDefeito() {
+		return caracteristicasDefeito;
+	}
+	public void setCaracteristicasDefeito(String caracteristicasDefeito) {
+		this.caracteristicasDefeito = caracteristicasDefeito;
+	}
+	
+	public String getRelatorioDeManutencao() {
+		return this.relatorioDeManutencao;
+	}
+	
+	public void setRelatorioDeManutencao(String relatorioDeManutencao) {
+		this.relatorioDeManutencao = relatorioDeManutencao;
+	}
+	
+	public void modificarRelatorioDeManutencao(String relatorioDeManutencao) {
+		this.relatorioDeManutencao = this.relatorioDeManutencao + " " + relatorioDeManutencao; //concatena a String recebida de relatorio e acrescenta à antiga.
+	}
 
 	public boolean equals(OrdemServico ordem) {
 		boolean resultado = false;
@@ -67,12 +104,13 @@ public class OrdemServico {
 
 		return resultado;
 	}
-
+	
+	@Override
 	public String toString() {
-		return "Número: " + "\n" + this.numero + "Data: " + this.dataEntrada + "\n" + "Quem recebeu: " + this.portador + "\n\n" + this.cliente.toString() + "Equipamento: \n" + this.equipamento.toString();
+		return "Número: " + this.numero +"\n" + "Data: " + this.dataEntrada + "\n" + "Portador: " + this.nomePortador + "\n\n" + this.cliente.toString() + "                 Equipamento" + "\n\n" + this.equipamento.toString() + "\n" + "Características do Defeito: \n" + this.getCaracteristicasDefeito() + "\n\n" + "Técnico Responsável" + "\n"  + this.tecnicoResponsavel.toString() + "\n\n" + "Relatório de Manutenção" + "\n" + this.relatorioDeManutencao;
 	}
 	
 	public String toStringPrioridades() {
-		return "Cliente: " + "  " + "OS no: " + "Data de Abertura" + "Equipamento" + "Prioridade" + "\n" + this.cliente.getNome() + "  " + this.numero + "  " + this.dataEntrada + "  " + this.equipamento.getTipo() + "  " + this.prioridade; 
+		return "Cliente: " + "  " + "OS no: " + "Data de Abertura" + "Equipamento" + "Prioridade" + "\n" + this.cliente.getNomeCompleto() + "  " + this.numero + "  " + this.dataEntrada + "  " + this.equipamento.getTipo() + "  " + this.prioridade; 
 	}
 }

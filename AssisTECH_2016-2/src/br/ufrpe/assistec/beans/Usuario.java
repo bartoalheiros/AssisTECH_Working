@@ -1,7 +1,7 @@
 package br.ufrpe.assistec.beans;
 
 public class Usuario {
-    private String nome;
+    private String nomeCompleto;
     private String email;
     private String telefone;
     
@@ -9,12 +9,12 @@ public class Usuario {
     	
     }
     
-    public String getNome() {
-    	return this.nome;
+    public String getNomeCompleto() {
+    	return this.nomeCompleto;
     }
     
-    public void setNome(String nome) {
-    	this.nome = nome;
+    public void setNomeCompleto(String nome) {
+    	this.nomeCompleto = nome;
     }
     
     public String getEmail() {
@@ -34,6 +34,6 @@ public class Usuario {
     }
     
     public String toString() {
-    	return "Nome: " + this.nome + "\n" + "Email: " + this.email + "\n" + "Telefone: " + this.telefone + "\n\n";
+    	return "Nome: " + this.nomeCompleto + "\n" + "Email: " + this.email + "\n" + "Telefone: " + this.telefone + "\n\n";
     }
 }

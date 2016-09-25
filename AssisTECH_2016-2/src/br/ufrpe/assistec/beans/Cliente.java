@@ -2,7 +2,6 @@ package br.ufrpe.assistec.beans;
 
 public class Cliente extends Usuario {
 	
-	private Equipamento equipamento;
 	private String endereco;
 	private String cpf;
     
@@ -22,12 +21,8 @@ public class Cliente extends Usuario {
 		this.endereco = endereco;
 	}
 	
-	public void setEquipamento (Equipamento equipamento) {
-		this.equipamento = equipamento;
-	}
-	
 	public String toString() {
-		return super.toString() + "                 Equipamento" + "\n\n" + this.equipamento.toString();
+		return "                 Cliente" + "\n\n" + super.toString();
 	}
 
 	
