@@ -23,8 +23,8 @@ public class Programa {
 			System.out.println("Escolha a opcao desejada: \n\n");
 			System.out.println("1 - Cadastrar Ordem de Servico\n");
 			System.out.println("2 - Listar Ordens de Servico em Aberto\n");
-			System.out.println("3 - Listar Todas as Ordens de Servico\n");
-			System.out.println("4 - Buscar Ordem de Servico\n");
+			System.out.println("3 - Buscar Ordem de Servico\n");
+			System.out.println("4 - Fechar Ordem de Servico\n");
 			System.out.println("5 - Cadastrar Cliente\n");
 			System.out.println("6 - Listar Clientes\n");
 			System.out.println("7 - Buscar Cliente\n");
@@ -42,12 +42,12 @@ public class Programa {
 				System.out.println("Número: \n");
 				String no = input.nextLine();
 				input.nextLine(); //Limpa o buffer do teclado
-				ordem.setNumero(no);;
+				ordem.setNumero(no);
 
 
 				System.out.println("Data de Entrada: \n");
 				String data = input.nextLine();
-				ordem.setDataEntrada(data);;
+				ordem.setDataEntrada(data);
 				input.nextLine(); //Limpa o buffer do teclado
 
 				System.out.println("Portador: \n");
@@ -131,25 +131,27 @@ public class Programa {
 				repositorioOS.listarOrdens();
 				break;
 
-			/*case "3":
-				System.out.println("Digite o código do livro: ");
-				codigo = input.nextLine();
+			case "3":
+				OrdemServico ordem_2 = new OrdemServico();
+			    System.out.println("Digite o número da Ordem de Servico: ");
+				String numeroOS = input.nextLine();
 				input.nextLine(); //Limpa o buffer do teclado
-				liv = repositorio.buscar(codigo);
-				if(liv != null) {
-					System.out.println(liv);	   
+				ordem_2 = repositorioOS.buscarOS(numeroOS);
+				if(ordem_2 != null) {
+					System.out.println(ordem_2);	   
 				}else{
-					System.out.println("Livro não existe!");	   
+					System.out.println("Ordem de Servico procurada não existe!");	   
 				}
 				break;
 
 			case "4":
-				System.out.println("Digite o código do livro que deseja alterar: ");
-				codigo = input.nextLine();
-				repositorio.alterar(codigo);
+				System.out.println("Digite o número da OS que deseja fechar: ");
+				String numeroOS_2 = input.nextLine();
+				input.nextLine(); //Limpa o buffer do teclado
+				repositorioOS.removerOS(numeroOS_2);
 				break;
 			
-			case "5":
+			/*case "5":
 				repositorio.listar();
 				break;*/
 
@@ -160,9 +162,9 @@ public class Programa {
 			//} //else {
 
 			//} 
-		}while(entrada.equals("6") == false);
+		}while(entrada.equals("8") == false);
 
-		System.out.println("Obrigado por utilizar nosso sistema de Livraria!"); 
+		System.out.println("Obrigado por utilizar AssisTec!"); 
         input.close();
 	}
 

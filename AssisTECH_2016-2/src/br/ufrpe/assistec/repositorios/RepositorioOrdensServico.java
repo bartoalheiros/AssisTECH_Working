@@ -34,16 +34,17 @@ public class RepositorioOrdensServico {
 		return resultado;
 	}
 	
-	public boolean buscarOS(String numero) {
-		boolean resultado = false;
+	public OrdemServico buscarOS(String numero) {
+		OrdemServico ordem = null;
 		
 		for(int i = 0; i < this.proxima; i++){
 			if(this.ordens[i].getNumero().equals(numero)){
-				resultado = true;
+				ordem = new OrdemServico();
+				ordem = this.ordens[i];
 			}
 		}
 		
-		return resultado;
+		return ordem;
 	}
 	
 	public void listarOrdens() {
