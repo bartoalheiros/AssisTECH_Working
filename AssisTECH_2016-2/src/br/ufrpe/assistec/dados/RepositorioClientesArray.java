@@ -1,17 +1,17 @@
-package br.ufrpe.assistec.repositorios;
+package br.ufrpe.assistec.dados;
 
-import br.ufrpe.assistec.beans.Cliente;
+import br.ufrpe.assistec.negocio.beans.Cliente;
 
-public class RepositorioClientes {
+public class RepositorioClientesArray {
 	private Cliente[] clientes;
 	private int proximo;
 	
-	public RepositorioClientes() {
+	public RepositorioClientesArray() {
 		this.clientes = new Cliente[100];
 		this.proximo = 0;
 	}
 	
-	public boolean cadastrarCliente(Cliente cliente) {
+	public boolean cadastrar(Cliente cliente) {
 		boolean resultado = false;
 
 		if(this.validarCpf(cliente)) {
@@ -44,7 +44,7 @@ public class RepositorioClientes {
 	public void removerCliente(String cpf) {
 		for(int i = 0; i < this.proximo; i++) {
 			if( cpf.equals( this.clientes[i].getCpf() ) ) {                            //removerCadastro(String cpf) - remove o cadastro do array de clientes, seguindo as regras
-				if(i == this.proximo - 1){                                             // 1 -  se o cliente for o último do array, ou seja, se i == this.proximo - 1 
+				if(i == this.proximo - 1) {                                            // 1 -  se o cliente for o último do array, ou seja, se i == this.proximo - 1 
 					this.clientes[i] = null;                                           // esta posição recebe null 
 					this.proximo = this.proximo - 1;                                   // o próximo passa a ser ela ou seja: this.proximo = proximo - 1  
 					System.out.print("Cliente Removido com Sucesso.");

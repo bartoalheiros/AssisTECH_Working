@@ -1,4 +1,4 @@
-package br.ufrpe.assistec.beans;
+package br.ufrpe.assistec.negocio.beans;
 
 public class Usuario {
     private String nomeCompleto;

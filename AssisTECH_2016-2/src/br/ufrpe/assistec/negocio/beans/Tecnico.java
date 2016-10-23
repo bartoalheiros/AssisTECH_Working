@@ -1,4 +1,4 @@
-package br.ufrpe.assistec.beans;
+package br.ufrpe.assistec.negocio.beans;
 
 public class Tecnico extends Usuario {
 	private String matricula;

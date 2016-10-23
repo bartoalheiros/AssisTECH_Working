@@ -1,12 +1,12 @@
-package br.ufrpe.assistec.repositorios;
+package br.ufrpe.assistec.dados;
 
-import br.ufrpe.assistec.beans.Tecnico;
+import br.ufrpe.assistec.negocio.beans.Tecnico;
 
-public class RepositorioTecnicos {
+public class RepositorioTecnicosArray {
 	private Tecnico[] tecnicos;
 	private int proximo;
 	
-	public RepositorioTecnicos() {
+	public RepositorioTecnicosArray() {
 		this.tecnicos = new Tecnico[100];
 		this.proximo = 0;
 	}

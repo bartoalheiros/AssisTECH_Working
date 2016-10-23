@@ -1,4 +1,4 @@
-package br.ufrpe.assistec.beans;
+package br.ufrpe.assistec.negocio.beans;
 
 public class OrdemServico {
 
@@ -112,5 +112,9 @@ public class OrdemServico {
 	
 	public String toStringPrioridades() {
 		return "Cliente: " + "  " + "OS no: " + "Data de Abertura" + "Equipamento" + "Prioridade" + "\n" + this.cliente.getNomeCompleto() + "  " + this.numero + "  " + this.dataEntrada + "  " + this.equipamento.getTipo() + "  " + this.prioridade; 
+	}
+	
+	public String toStringShort() {
+		return "OS no " +"\n"+ this.numero + "Cliente: " +  this.cliente.getNomeCompleto() + "\n" + "Equipamento: " + this.equipamento.getTipo() + "\n" + "Série: " + this.equipamento.getNumeroSerie() +"\n" + "-------------------------------------------------------------------";
 	}
 }

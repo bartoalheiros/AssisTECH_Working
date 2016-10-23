@@ -1,14 +1,14 @@
 
-package br.ufrpe.assistec.repositorios;
+package br.ufrpe.assistec.dados;
 
-import br.ufrpe.assistec.beans.Cliente;
-import br.ufrpe.assistec.beans.OrdemServico;
+import br.ufrpe.assistec.negocio.beans.Cliente;
+import br.ufrpe.assistec.negocio.beans.OrdemServico;
 
-public class RepositorioOrdensServico {
+public class RepositorioOrdensServicoArray {
 	private OrdemServico[] ordens;
 	private int proxima;
 	
-	public RepositorioOrdensServico() {
+	public RepositorioOrdensServicoArray() {
 		this.ordens = new OrdemServico[100];
 		this.proxima = 0;
 	}
@@ -50,7 +50,7 @@ public class RepositorioOrdensServico {
 	public void listarOrdens() {
 		if(this.proxima > 0){
 			for(int i = 0; i < this.proxima; i ++) {
-				System.out.print(this.ordens[i]);
+				System.out.print(this.ordens[i].toStringShort());
 			}
 		}else{
 			System.out.println("Nenhuma OS Cadastrada.");

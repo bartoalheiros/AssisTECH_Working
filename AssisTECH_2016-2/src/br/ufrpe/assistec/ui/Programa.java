@@ -1,12 +1,12 @@
-package br.ufrpe.assistec.programas;
+package br.ufrpe.assistec.ui;
 
 import java.util.Scanner;
 
-import br.ufrpe.assistec.beans.Cliente;
-import br.ufrpe.assistec.beans.Equipamento;
-import br.ufrpe.assistec.beans.OrdemServico;
-import br.ufrpe.assistec.beans.Tecnico;
-import br.ufrpe.assistec.repositorios.RepositorioOrdensServico;
+import br.ufrpe.assistec.dados.RepositorioOrdensServicoArray;
+import br.ufrpe.assistec.negocio.beans.Cliente;
+import br.ufrpe.assistec.negocio.beans.Equipamento;
+import br.ufrpe.assistec.negocio.beans.OrdemServico;
+import br.ufrpe.assistec.negocio.beans.Tecnico;
 
 public class Programa {
 
@@ -15,14 +15,14 @@ public class Programa {
 		String entrada = null;
 
 		//MENU
-		RepositorioOrdensServico repositorioOS = new RepositorioOrdensServico(); 
+		RepositorioOrdensServicoArray repositorioOS = new RepositorioOrdensServicoArray(); 
 		String codigo;
 
 		do{
 			entrada = null; 
 			System.out.println("Escolha a opcao desejada: \n\n");
 			System.out.println("1 - Cadastrar Ordem de Servico\n");
-			System.out.println("2 - Listar Ordens de Servico em Aberto\n");
+			System.out.println("2 - Listar Ordens de Servico Cadastradas\n");
 			System.out.println("3 - Buscar Ordem de Servico\n");
 			System.out.println("4 - Fechar Ordem de Servico\n");
 			System.out.println("5 - Cadastrar Cliente\n");
@@ -55,7 +55,7 @@ public class Programa {
 				input.nextLine(); //Limpa o buffer do teclado
 				ordem.setPortador(portador);
 				
-				//Cadastrando o Cliente
+				//"Cadastrando" o Cliente
 				Cliente cliente = new Cliente();
 				System.out.printf("Dados do Cliente\n\n");
 				

@@ -1,10 +1,10 @@
-package br.ufrpe.assistec.programas;
+package br.ufrpe.assistec.ui;
 
-import br.ufrpe.assistec.beans.Cliente;
-import br.ufrpe.assistec.beans.Equipamento;
-import br.ufrpe.assistec.beans.OrdemServico;
-import br.ufrpe.assistec.beans.Tecnico;
-import br.ufrpe.assistec.repositorios.RepositorioOrdensServico;
+import br.ufrpe.assistec.dados.RepositorioOrdensServicoArray;
+import br.ufrpe.assistec.negocio.beans.Cliente;
+import br.ufrpe.assistec.negocio.beans.Equipamento;
+import br.ufrpe.assistec.negocio.beans.OrdemServico;
+import br.ufrpe.assistec.negocio.beans.Tecnico;
 
 public class Demo {
 
@@ -13,7 +13,7 @@ public class Demo {
 		Equipamento equipamento = new Equipamento();
 		OrdemServico ordemServico = new OrdemServico();
 		Tecnico tecnico = new Tecnico();
-		RepositorioOrdensServico repositorioOS = new RepositorioOrdensServico();
+		RepositorioOrdensServicoArray repositorioOS = new RepositorioOrdensServicoArray();
 		
 		//preenchendo cadastro de cliente
 		cliente.setNomeCompleto("José Padilha Almeida Caetano");
