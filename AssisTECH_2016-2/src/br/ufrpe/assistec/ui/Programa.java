@@ -5,7 +5,7 @@ import java.util.Scanner;
 import br.ufrpe.assistec.dados.RepositorioOrdensServicoArray;
 import br.ufrpe.assistec.negocio.beans.Cliente;
 import br.ufrpe.assistec.negocio.beans.Equipamento;
-import br.ufrpe.assistec.negocio.beans.OrdemServico;
+import br.ufrpe.assistec.negocio.beans.OrdemDeServico;
 import br.ufrpe.assistec.negocio.beans.Tecnico;
 
 public class Programa {
@@ -38,7 +38,7 @@ public class Programa {
 			//instanciando um novo livro, preenchendo e guardando no repositórioLivros...  
 			case "1":
 				//Dados iniciais
-				OrdemServico ordem = new OrdemServico();	
+				OrdemDeServico ordem = new OrdemDeServico();	
 				System.out.println("Número: \n");
 				String no = input.nextLine();
 				input.nextLine(); //Limpa o buffer do teclado
@@ -124,7 +124,7 @@ public class Programa {
 				input.nextLine(); //Limpa o buffer do teclado
 				ordem.setRelatorioDeManutencao(relatorio);
 				
-				repositorioOS.cadastrarOS(ordem);
+				repositorioOS.cadastrar(ordem);
 				break;
 
 			case "2":
@@ -132,11 +132,11 @@ public class Programa {
 				break;
 
 			case "3":
-				OrdemServico ordem_2 = new OrdemServico();
+				OrdemDeServico ordem_2 = new OrdemDeServico();
 			    System.out.println("Digite o número da Ordem de Servico: ");
 				String numeroOS = input.nextLine();
 				input.nextLine(); //Limpa o buffer do teclado
-				ordem_2 = repositorioOS.buscarOS(numeroOS);
+				ordem_2 = repositorioOS.procurar(numeroOS);
 				if(ordem_2 != null) {
 					System.out.println(ordem_2);	   
 				}else{

@@ -2,28 +2,23 @@
 package br.ufrpe.assistec.dados;
 
 import br.ufrpe.assistec.negocio.beans.Cliente;
-import br.ufrpe.assistec.negocio.beans.OrdemServico;
+import br.ufrpe.assistec.negocio.beans.OrdemDeServico;
 
 public class RepositorioOrdensServicoArray {
-	private OrdemServico[] ordens;
+	private OrdemDeServico[] ordens;
 	private int proxima;
 	
 	public RepositorioOrdensServicoArray() {
-		this.ordens = new OrdemServico[100];
+		this.ordens = new OrdemDeServico[100];
 		this.proxima = 0;
 	}
 	
-	public void cadastrarOS(OrdemServico ordemServico) {
-
-		if(this.validarNumero(ordemServico)) {
-			System.out.println("Os já registrada.");
-		} else{
-			this.ordens[this.proxima] = ordemServico;
-			this.proxima++;
-		}
+	public void cadastrar(OrdemDeServico os) {
+		this.ordens[this.proxima] = os;
+		this.proxima++;
 	}
 	
-	public boolean validarNumero(OrdemServico os) {
+	public boolean existe(OrdemDeServico os) {
 		boolean resultado = false;
 		for(int i = 0; i < this.proxima; i++) {
 			if(this.ordens[i].getNumero().equals(os.getNumero())) {                 //se o código do livro[i] for igual ao código do livro que passei, resultado = true.
@@ -34,12 +29,12 @@ public class RepositorioOrdensServicoArray {
 		return resultado;
 	}
 	
-	public OrdemServico buscarOS(String numero) {
-		OrdemServico ordem = null;
+	public OrdemDeServico procurar(String numero) {
+		OrdemDeServico ordem = null;
 		
 		for(int i = 0; i < this.proxima; i++){
 			if(this.ordens[i].getNumero().equals(numero)){
-				ordem = new OrdemServico();
+				ordem = new OrdemDeServico();
 				ordem = this.ordens[i];
 			}
 		}

@@ -3,7 +3,7 @@ package br.ufrpe.assistec.ui;
 import br.ufrpe.assistec.dados.RepositorioOrdensServicoArray;
 import br.ufrpe.assistec.negocio.beans.Cliente;
 import br.ufrpe.assistec.negocio.beans.Equipamento;
-import br.ufrpe.assistec.negocio.beans.OrdemServico;
+import br.ufrpe.assistec.negocio.beans.OrdemDeServico;
 import br.ufrpe.assistec.negocio.beans.Tecnico;
 
 public class Demo {
@@ -11,7 +11,7 @@ public class Demo {
 	public static void main(String[] args) {
 		Cliente cliente = new Cliente();
 		Equipamento equipamento = new Equipamento();
-		OrdemServico ordemServico = new OrdemServico();
+		OrdemDeServico ordemServico = new OrdemDeServico();
 		Tecnico tecnico = new Tecnico();
 		RepositorioOrdensServicoArray repositorioOS = new RepositorioOrdensServicoArray();
 		
