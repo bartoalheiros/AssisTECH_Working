@@ -128,7 +128,7 @@ public class Programa {
 				break;
 
 			case "2":
-				repositorioOS.listarOrdens();
+				repositorioOS.listar();
 				break;
 
 			case "3":
@@ -136,7 +136,7 @@ public class Programa {
 			    System.out.println("Digite o número da Ordem de Servico: ");
 				String numeroOS = input.nextLine();
 				input.nextLine(); //Limpa o buffer do teclado
-				ordem_2 = repositorioOS.procurar(numeroOS);
+				ordem_2 = repositorioOS.buscar(numeroOS);
 				if(ordem_2 != null) {
 					System.out.println(ordem_2);	   
 				}else{
@@ -148,7 +148,7 @@ public class Programa {
 				System.out.println("Digite o número da OS que deseja fechar: ");
 				String numeroOS_2 = input.nextLine();
 				input.nextLine(); //Limpa o buffer do teclado
-				repositorioOS.removerOS(numeroOS_2);
+				repositorioOS.remover(numeroOS_2);
 				break;
 			
 			/*case "5":

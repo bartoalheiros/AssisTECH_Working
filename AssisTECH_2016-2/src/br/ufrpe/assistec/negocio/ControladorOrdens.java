@@ -3,10 +3,10 @@ package br.ufrpe.assistec.negocio;
 import br.ufrpe.assistec.dados.RepositorioOrdensServicoArray;
 import br.ufrpe.assistec.negocio.beans.OrdemDeServico;
 
-public class CadastroOrdens {
+public class ControladorOrdens {
 	private RepositorioOrdensServicoArray repositorio;
 	
-	public CadastroOrdens() {
+	public ControladorOrdens() {
 		this.repositorio = new RepositorioOrdensServicoArray();
 	}
 	
@@ -37,8 +37,14 @@ public class CadastroOrdens {
     }
 	
 	public OrdemDeServico procurar(String numero) {
-		return this.repositorio.procurar(numero);
+		return this.repositorio.buscar(numero);
 	}
 	
+	public void removerOS(String numero) {
+		this.repositorio.remover(numero);
+	}
 	
+	public void listar() {
+		this.repositorio.listar();
+	}
 }
