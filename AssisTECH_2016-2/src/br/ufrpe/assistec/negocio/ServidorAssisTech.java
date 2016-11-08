@@ -59,4 +59,18 @@ public class ServidorAssisTech {
 	 public void cadastrarOrdem(OrdemDeServico os) {
 		 ordens.cadastrar(os);
 	 }
+	 
+	 public OrdemDeServico procurar(String numero) {
+		return ordens.procurar(numero);
+	}
+	 
+	 public void removerOS(String numero) {
+		 ordens.removerOS(numero);
+	}
+	 
+	public void listarOrdens() {
+		ordens.listar();
+	}
+ 
+
 }

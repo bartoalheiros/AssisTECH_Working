@@ -115,6 +115,10 @@ public class OrdemDeServico {
 	}
 	
 	public String toStringShort() {
-		return "OS no " +"\n"+ this.numero + "Cliente: " +  this.cliente.getNomeCompleto() + "\n" + "Equipamento: " + this.equipamento.getTipo() + "\n" + "Série: " + this.equipamento.getNumeroSerie() +"\n" + "-------------------------------------------------------------------";
+		String resultado = "************************************\n";
+		resultado += String.format("%16s %15s\n","OS no: ", this.numero);
+		resultado += "************************************\n";
+		//return "OS no: " +"\n"+ this.numero + "Cliente: " +  this.cliente.getNomeCompleto() + "\n" + "Equipamento: " + this.equipamento.getTipo() + "\n" + "Série: " + this.equipamento.getNumeroSerie() +"\n" + "-------------------------------------------------------------------";
+		return resultado;
 	}
 }

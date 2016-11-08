@@ -3,6 +3,7 @@ package br.ufrpe.assistec.ui;
 import java.util.Scanner;
 
 import br.ufrpe.assistec.dados.RepositorioOrdensServicoArray;
+import br.ufrpe.assistec.negocio.ServidorAssisTech;
 import br.ufrpe.assistec.negocio.beans.Cliente;
 import br.ufrpe.assistec.negocio.beans.Equipamento;
 import br.ufrpe.assistec.negocio.beans.OrdemDeServico;
@@ -15,7 +16,9 @@ public class Programa {
 		String entrada = null;
 
 		//MENU
-		RepositorioOrdensServicoArray repositorioOS = new RepositorioOrdensServicoArray(); 
+		ServidorAssisTech servidor = null;
+		servidor = servidor.getInstance();
+		//RepositorioOrdensServicoArray repositorioOS = new RepositorioOrdensServicoArray(); 
 		String codigo;
 
 		do{
@@ -23,7 +26,7 @@ public class Programa {
 			System.out.println("Escolha a opcao desejada: \n\n");
 			System.out.println("1 - Cadastrar Ordem de Servico\n");
 			System.out.println("2 - Listar Ordens de Servico Cadastradas\n");
-			System.out.println("3 - Buscar Ordem de Servico\n");
+			System.out.println("3 - Visualizar uma Ordem de Servico\n");
 			System.out.println("4 - Fechar Ordem de Servico\n");
 			System.out.println("5 - Cadastrar Cliente\n");
 			System.out.println("6 - Listar Clientes\n");
@@ -124,11 +127,13 @@ public class Programa {
 				input.nextLine(); //Limpa o buffer do teclado
 				ordem.setRelatorioDeManutencao(relatorio);
 				
-				repositorioOS.cadastrar(ordem);
+				//repositorioOS.cadastrar(ordem);
+				servidor.cadastrarOrdem(ordem);
 				break;
 
 			case "2":
-				repositorioOS.listar();
+				//repositorioOS.listar();
+				servidor.listarOrdens();
 				break;
 
 			case "3":
@@ -136,7 +141,7 @@ public class Programa {
 			    System.out.println("Digite o número da Ordem de Servico: ");
 				String numeroOS = input.nextLine();
 				input.nextLine(); //Limpa o buffer do teclado
-				ordem_2 = repositorioOS.buscar(numeroOS);
+				ordem_2 = servidor.procurar(numeroOS);
 				if(ordem_2 != null) {
 					System.out.println(ordem_2);	   
 				}else{
@@ -148,7 +153,8 @@ public class Programa {
 				System.out.println("Digite o número da OS que deseja fechar: ");
 				String numeroOS_2 = input.nextLine();
 				input.nextLine(); //Limpa o buffer do teclado
-				repositorioOS.remover(numeroOS_2);
+				//repositorioOS.remover(numeroOS_2);
+				servidor.removerOS(numeroOS_2);
 				break;
 			
 			/*case "5":
