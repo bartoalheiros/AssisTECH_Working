@@ -1,5 +1,6 @@
 package br.ufrpe.assistec.negocio;
 
+import br.ufrpe.assistec.dados.OSNaoEncontradaException;
 import br.ufrpe.assistec.dados.RepositorioOrdensServicoArray;
 import br.ufrpe.assistec.negocio.beans.OrdemDeServico;
 
@@ -10,7 +11,7 @@ public class ControladorOrdens {
 		this.repositorio = new RepositorioOrdensServicoArray();
 	}
 	
-	public boolean existe(OrdemDeServico os) {
+	public boolean existe(OrdemDeServico os) throws OSExistenteException {
 		return this.repositorio.existe(os);
 	}
 	
@@ -21,22 +22,23 @@ public class ControladorOrdens {
      *  
      * @param OrdemDeServico
      * @return void
+     * @throws OSExistenteException 
+     * @throws EquipamentoJahEncaminhadoException 
      *         
      */
-	public void cadastrar(OrdemDeServico os) {
+	public void cadastrar(OrdemDeServico os) throws OSExistenteException, EquipamentoJahEncaminhadoException {
         if (os == null) {
             throw new IllegalArgumentException("Parâmetro inválido");
         } else {
             if (!this.existe(os)) {
-                this.repositorio.cadastrar(os);
-            } else {
-                // contaJahExisteException
-                
-            }
+            	if(!this.procurarEquipamento(os.getEquipamento().getNumeroSerie())) {
+            		this.repositorio.cadastrar(os);
+            	}
+           }
         }        
     }
 	
-	public OrdemDeServico procurar(String numero) {
+	public OrdemDeServico buscarOrdem(String numero) throws OSNaoEncontradaException {
 		return this.repositorio.buscar(numero);
 	}
 	
@@ -46,5 +48,9 @@ public class ControladorOrdens {
 	
 	public void listar() {
 		this.repositorio.listar();
+	}
+	
+	public boolean procurarEquipamento(String serie) throws EquipamentoJahEncaminhadoException {
+		return this.repositorio.procurarEquipamento(serie);
 	}
 }

@@ -1,6 +1,8 @@
 
 package br.ufrpe.assistec.dados;
 
+import br.ufrpe.assistec.negocio.EquipamentoJahEncaminhadoException;
+import br.ufrpe.assistec.negocio.OSExistenteException;
 import br.ufrpe.assistec.negocio.beans.Cliente;
 import br.ufrpe.assistec.negocio.beans.OrdemDeServico;
 
@@ -18,25 +20,30 @@ public class RepositorioOrdensServicoArray implements IRepositorioOrdensServico 
 		this.proxima++;
 	}
 	
-	public boolean existe(OrdemDeServico os) {
+	public boolean existe(OrdemDeServico os) throws OSExistenteException {
 		boolean resultado = false;
 		for(int i = 0; i < this.proxima; i++) {
 			if(this.ordens[i].getNumero().equals(os.getNumero())) {                 //se o código do livro[i] for igual ao código do livro que passei, resultado = true.
-				resultado = true;	
+				resultado = true;
+				throw new OSExistenteException();
 			}
 		}
 
 		return resultado;
 	}
 	
-	public OrdemDeServico buscar(String numero) {
+	public OrdemDeServico buscar(String numero) throws OSNaoEncontradaException {
 		OrdemDeServico ordem = null;
 		
-		for(int i = 0; i < this.proxima; i++){
-			if(this.ordens[i].getNumero().equals(numero)){
+		for(int i = 0; i < this.proxima; i++) {
+			if(this.ordens[i].getNumero().equals(numero)) {
 				ordem = new OrdemDeServico();
 				ordem = this.ordens[i];
 			}
+		}
+		
+		if(ordem == null) {
+			throw new OSNaoEncontradaException();
 		}
 		
 		return ordem;
@@ -45,11 +52,39 @@ public class RepositorioOrdensServicoArray implements IRepositorioOrdensServico 
 	public void listar() {
 		if(this.proxima > 0){
 			for(int i = 0; i < this.proxima; i ++) {
-				System.out.print(this.ordens[i].toStringShort());
+				System.out.print(this.ordens[i].toStringResumo());
 			}
 		}else{
 			System.out.println("Nenhuma OS Cadastrada.");
 		}	
+	}
+	
+	public void listarOrdensPorDataEntrada() {
+		if(this.proxima > 0){
+			for(int i = 0; i < this.proxima; i ++) {
+				System.out.print(this.ordens[i].toStringDatas());
+			}
+		}else{
+			System.out.println("Nenhuma OS Cadastrada.");
+		}
+	}
+	
+	/*
+	 * Verifica se um equipamento já está cadastrado em alguma OS do array.
+	 * @param String: número de série da OS.
+     * @return boolean
+	 * */
+	public boolean procurarEquipamento(String serie) throws EquipamentoJahEncaminhadoException {
+		boolean resultado = false;
+		
+		for(int i = 0; i < this.proxima; i++) {
+			if(this.ordens[i].getEquipamento().getNumeroSerie().equals(serie)) {
+				resultado = true;
+				throw new EquipamentoJahEncaminhadoException();
+			}
+		}
+
+		return resultado;
 	}
 	
 	public void remover(String numero) {

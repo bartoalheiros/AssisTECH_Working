@@ -114,9 +114,32 @@ public class OrdemDeServico {
 		return "Cliente: " + "  " + "OS no: " + "Data de Abertura" + "Equipamento" + "Prioridade" + "\n" + this.cliente.getNomeCompleto() + "  " + this.numero + "  " + this.dataEntrada + "  " + this.equipamento.getTipo() + "  " + this.prioridade; 
 	}
 	
-	public String toStringShort() {
+	public String toStringResumo() {
+		
+		String resultado = String.format("%7s %5s\n", "OS no: ", this.numero);
+		resultado += String.format("%6s %10s\n", "Data: ", this.dataEntrada);
+		resultado += String.format("%6s %10s\n", "Cliente: ", this.cliente.getNomeCompleto());
+		resultado += String.format("%6s %10s\n", "Equip: ", this.equipamento.getTipo());
+		resultado += String.format("%6s %10s", "Defeito: ", this.getCaracteristicasDefeito());
+		
+		return resultado;
+	}
+	
+	public String toStringDatas() {
+		
+		String resultado = String.format("%7s %5s\n", "OS no: ", this.numero);
+		resultado += String.format("%6s %10s\n", "Data: ", this.dataEntrada);
+		
+		return resultado;
+	}
+	
+	/*
+	 * Método que mostra uma tabela com todas as OS's cadastradas.
+	 * 
+	 * */
+	public String toStringTabela() {
 		String resultado = "************************************\n";
-		resultado += String.format("%16s %15s\n","OS no: ", this.numero);
+		resultado += String.format("%16s %15s\n","OS no", "Cliente");
 		resultado += "************************************\n";
 		//return "OS no: " +"\n"+ this.numero + "Cliente: " +  this.cliente.getNomeCompleto() + "\n" + "Equipamento: " + this.equipamento.getTipo() + "\n" + "Série: " + this.equipamento.getNumeroSerie() +"\n" + "-------------------------------------------------------------------";
 		return resultado;

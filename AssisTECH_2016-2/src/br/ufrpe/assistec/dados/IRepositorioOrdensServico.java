@@ -6,7 +6,7 @@ public interface IRepositorioOrdensServico {
 	
 	public void cadastrar(OrdemDeServico os);
 	
-	public OrdemDeServico buscar(String numero);
+	public OrdemDeServico buscar(String numero) throws OSNaoEncontradaException;
 	
 	public void remover(String numero);
 	

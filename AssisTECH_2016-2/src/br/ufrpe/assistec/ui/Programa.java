@@ -2,7 +2,8 @@ package br.ufrpe.assistec.ui;
 
 import java.util.Scanner;
 
-import br.ufrpe.assistec.dados.RepositorioOrdensServicoArray;
+import br.ufrpe.assistec.dados.OSNaoEncontradaException;
+import br.ufrpe.assistec.negocio.OSExistenteException;
 import br.ufrpe.assistec.negocio.ServidorAssisTech;
 import br.ufrpe.assistec.negocio.beans.Cliente;
 import br.ufrpe.assistec.negocio.beans.Equipamento;
@@ -10,27 +11,26 @@ import br.ufrpe.assistec.negocio.beans.OrdemDeServico;
 import br.ufrpe.assistec.negocio.beans.Tecnico;
 
 public class Programa {
-
-	public static void main(String[] args) {
+	
+	public static void main(String[] args) throws OSNaoEncontradaException, OSExistenteException {
 		Scanner input = new Scanner(System.in);
 		String entrada = null;
 
 		//MENU
 		ServidorAssisTech servidor = null;
 		servidor = servidor.getInstance();
-		//RepositorioOrdensServicoArray repositorioOS = new RepositorioOrdensServicoArray(); 
-		String codigo;
-
+		
 		do{
 			entrada = null; 
 			System.out.println("Escolha a opcao desejada: \n\n");
 			System.out.println("1 - Cadastrar Ordem de Servico\n");
-			System.out.println("2 - Listar Ordens de Servico Cadastradas\n");
-			System.out.println("3 - Visualizar uma Ordem de Servico\n");
-			System.out.println("4 - Fechar Ordem de Servico\n");
-			System.out.println("5 - Cadastrar Cliente\n");
-			System.out.println("6 - Listar Clientes\n");
-			System.out.println("7 - Buscar Cliente\n");
+			System.out.println("2 - Listar Ordens de Servico Cadastradas(Resumo)\n");
+			System.out.println("3 - Listar Ordens de Servico Cadastradas(Por data/prioridade)\n");
+			//System.out.println("4 - Visualizar uma Ordem de Servico\n");
+			//System.out.println("4 - Fechar Ordem de Servico\n");
+			//System.out.println("5 - Cadastrar Cliente\n");
+			//System.out.println("6 - Listar Clientes\n");
+			//System.out.println("7 - Buscar Cliente\n");
 			System.out.println("8 - Sair\n\n");
 			System.out.println("Opção: "); entrada = input.next(); 
 			input.nextLine(); //Limpa o buffer do teclado
@@ -132,21 +132,20 @@ public class Programa {
 				break;
 
 			case "2":
-				//repositorioOS.listar();
-				servidor.listarOrdens();
-				break;
-
-			case "3":
 				OrdemDeServico ordem_2 = new OrdemDeServico();
 			    System.out.println("Digite o número da Ordem de Servico: ");
 				String numeroOS = input.nextLine();
 				input.nextLine(); //Limpa o buffer do teclado
-				ordem_2 = servidor.procurar(numeroOS);
+				ordem_2 = servidor.buscarOrdem(numeroOS);
 				if(ordem_2 != null) {
 					System.out.println(ordem_2);	   
 				}else{
 					System.out.println("Ordem de Servico procurada não existe!");	   
 				}
+				break;
+
+			case "3":
+				servidor.listarOrdens();
 				break;
 
 			case "4":

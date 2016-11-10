@@ -1,5 +1,6 @@
 package br.ufrpe.assistec.negocio;
 
+import br.ufrpe.assistec.dados.OSNaoEncontradaException;
 import br.ufrpe.assistec.negocio.beans.Cliente;
 import br.ufrpe.assistec.negocio.beans.OrdemDeServico;
 import br.ufrpe.assistec.negocio.beans.Tecnico;
@@ -56,12 +57,12 @@ public class ServidorAssisTech {
 		 return ordens.existe(os);
 	 }
 	 
-	 public void cadastrarOrdem(OrdemDeServico os) {
+	 public void cadastrarOrdem(OrdemDeServico os) throws OSExistenteException, EquipamentoJahEncaminhadoException {
 		 ordens.cadastrar(os);
 	 }
 	 
-	 public OrdemDeServico procurar(String numero) {
-		return ordens.procurar(numero);
+	 public OrdemDeServico buscarOrdem(String numero) throws OSNaoEncontradaException {
+		return ordens.buscarOrdem(numero);
 	}
 	 
 	 public void removerOS(String numero) {
@@ -70,6 +71,10 @@ public class ServidorAssisTech {
 	 
 	public void listarOrdens() {
 		ordens.listar();
+	}
+	
+	public boolean procurarEquipamento(String serie) {
+		return ordens.procurarEquipamento(serie);
 	}
  
 
