@@ -3,6 +3,7 @@ package br.ufrpe.assistec.ui;
 import java.util.Scanner;
 
 import br.ufrpe.assistec.dados.OSNaoEncontradaException;
+import br.ufrpe.assistec.negocio.EquipamentoJahEncaminhadoException;
 import br.ufrpe.assistec.negocio.OSExistenteException;
 import br.ufrpe.assistec.negocio.ServidorAssisTech;
 import br.ufrpe.assistec.negocio.beans.Cliente;
@@ -12,7 +13,7 @@ import br.ufrpe.assistec.negocio.beans.Tecnico;
 
 public class Programa {
 	
-	public static void main(String[] args) throws OSNaoEncontradaException, OSExistenteException {
+	public static void main(String[] args) throws OSNaoEncontradaException, OSExistenteException, EquipamentoJahEncaminhadoException {
 		Scanner input = new Scanner(System.in);
 		String entrada = null;
 
@@ -41,11 +42,14 @@ public class Programa {
 			//instanciando um novo livro, preenchendo e guardando no repositórioLivros...  
 			case "1":
 				//Dados iniciais
-				OrdemDeServico ordem = new OrdemDeServico();	
-				System.out.println("Número: \n");
-				String no = input.nextLine();
-				input.nextLine(); //Limpa o buffer do teclado
-				ordem.setNumero(no);
+				try{
+					OrdemDeServico ordem = new OrdemDeServico();
+					System.out.println("Número: \n");
+					String no = input.nextLine();
+					input.nextLine(); //Limpa o buffer do teclado
+					ordem.setNumero(no);
+				}
+				
 
 
 				System.out.println("Data de Entrada: \n");
@@ -87,13 +91,30 @@ public class Programa {
 				input.nextLine(); //Limpa o buffer do teclado
 				equipto.setTipo(tipo);
 				
-				System.out.println("No de Série: ");
-				String noSerie = input.nextLine();
-				input.nextLine(); //Limpa o buffer do teclado
-				equipto.setNumeroSerie(noSerie);
+				boolean check = false;
 				
-				ordem.setEquipamento(equipto);
-				
+				do{
+					try{
+
+						//Cadastro do equipamento
+						
+						
+						System.out.println("No de Série: ");
+						String numSerie = input.nextLine();
+						input.nextLine(); //Limpa o buffer do teclado
+
+						check = servidor.validarEquipamento(numSerie);
+						equipto.setNumeroSerie(numSerie);
+						ordem.setEquipamento(equipto);
+
+					} catch(EquipamentoJahEncaminhadoException equipEmServico) {
+
+						System.out.println("cheguei aqui");
+						System.err.print(equipEmServico.getMessage());
+
+					}
+				}while(check == true);
+			
 				//Fim do cadastro do equipamento, continuando a construir a ordem
 				
 				System.out.println("Características do Defeito: ");

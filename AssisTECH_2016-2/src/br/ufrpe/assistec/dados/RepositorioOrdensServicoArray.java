@@ -1,10 +1,12 @@
 
 package br.ufrpe.assistec.dados;
 
-import br.ufrpe.assistec.negocio.EquipamentoJahEncaminhadoException;
-import br.ufrpe.assistec.negocio.OSExistenteException;
+import br.ufrpe.assistec.negocio.EquipamentoServicoException;
+import br.ufrpe.assistec.negocio.OSExisteException;
 import br.ufrpe.assistec.negocio.beans.Cliente;
+import br.ufrpe.assistec.negocio.beans.Equipamento;
 import br.ufrpe.assistec.negocio.beans.OrdemDeServico;
+import br.ufrpe.assistec.negocio.beans.Tecnico;
 
 public class RepositorioOrdensServicoArray implements IRepositorioOrdensServico {
 	private OrdemDeServico[] ordens;
@@ -20,12 +22,12 @@ public class RepositorioOrdensServicoArray implements IRepositorioOrdensServico 
 		this.proxima++;
 	}
 	
-	public boolean existe(OrdemDeServico os) throws OSExistenteException {
+	public boolean existe(OrdemDeServico os) throws OSExisteException {
 		boolean resultado = false;
 		for(int i = 0; i < this.proxima; i++) {
 			if(this.ordens[i].getNumero().equals(os.getNumero())) {                 //se o código do livro[i] for igual ao código do livro que passei, resultado = true.
 				resultado = true;
-				throw new OSExistenteException();
+				throw new OSExisteException();
 			}
 		}
 
@@ -73,17 +75,43 @@ public class RepositorioOrdensServicoArray implements IRepositorioOrdensServico 
 	 * Verifica se um equipamento já está cadastrado em alguma OS do array.
 	 * @param String: número de série da OS.
      * @return boolean
+     * ps.: faz parte desta classe porque um equipamento pode estar cadastrado no sistema, mas pode não estar em nenhuma OS.
+     * Já aqui nós fazemos a verificação se ele está em uma OS.
+     * As possibilidades de ele estar cadastrado apenas no sistema, sem estar vinculado a alguma OS, serão tratadas
+     * em situações posteriores no código.
 	 * */
-	public boolean procurarEquipamento(String serie) throws EquipamentoJahEncaminhadoException {
+	public boolean validarEquipamento(String serie) throws EquipamentoServicoException {
 		boolean resultado = false;
+		Equipamento equip = null;
+		String numSerie = null;
 		
 		for(int i = 0; i < this.proxima; i++) {
-			if(this.ordens[i].getEquipamento().getNumeroSerie().equals(serie)) {
+			equip = this.ordens[i].getEquipamento();
+			numSerie = equip.getNumeroSerie();
+			if(numSerie.equals(serie)) {
 				resultado = true;
-				throw new EquipamentoJahEncaminhadoException();
+				throw new EquipamentoServicoException(serie);
 			}
 		}
 
+		return resultado;
+	}
+	
+	/*Este método permite encontrar um equipamento, associado a uma Ordem, e devolver a instância dele para o método
+	 * que o chamou.*/
+	public boolean procurarEquipamento(String serie) {
+		boolean resultado = false;
+		Equipamento equip = null;
+		String numSerie = null;
+		
+		for(int i = 0; i < this.proxima; i++) { 
+			equip = this.ordens[i].getEquipamento();
+			numSerie = equip.getNumeroSerie();
+			if(numSerie.equals(serie)) {
+				resultado = true;
+			}
+		}
+		
 		return resultado;
 	}
 	
@@ -114,6 +142,44 @@ public class RepositorioOrdensServicoArray implements IRepositorioOrdensServico 
 		}
 		
 		return indice;
+	}
+	
+	/*
+	 * 
+	 * altera um equipamento, cliente ou técnico em uma ordem de serviço. Recebendo a instância da ordem que se quer alterar.
+	 * 
+	 * */
+	public void alterar(OrdemDeServico os, String tipo, Object o) throws EquipamentoServicoException {
+		
+		switch(tipo) {
+			
+			case "equip":
+				if(o instanceof Equipamento) {
+					Equipamento equip = (Equipamento) o;
+					String numSerie = equip.getNumeroSerie();
+					os.setEquipamento(equip);
+					
+				}
+				
+				break;	
+				
+			case "cli":
+				if(o instanceof Cliente) {
+					Cliente cli = (Cliente) o;
+					os.setCliente(cli);
+				}
+			
+				break;
+				
+			case "tec":
+				if(o instanceof Tecnico) {
+					Tecnico tec = (Tecnico) o;
+					os.setTecnicoResponsavel(tec);
+				}
+				
+				break;
+		}
+		
 	}
 	
 	public void listarOrdensPorPrioridade() { 

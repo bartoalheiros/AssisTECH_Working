@@ -1,7 +1,7 @@
 package br.ufrpe.assistec.ui;
 
-import br.ufrpe.assistec.negocio.EquipamentoJahEncaminhadoException;
-import br.ufrpe.assistec.negocio.OSExistenteException;
+import br.ufrpe.assistec.negocio.EquipamentoServicoException;
+import br.ufrpe.assistec.negocio.OSExisteException;
 import br.ufrpe.assistec.negocio.ServidorAssisTech;
 import br.ufrpe.assistec.negocio.beans.Cliente;
 import br.ufrpe.assistec.negocio.beans.Equipamento;
@@ -14,9 +14,9 @@ import br.ufrpe.assistec.dados.*;
 
 public class Demo {
 
-	public static void main(String[] args) throws OSNaoEncontradaException, EquipamentoJahEncaminhadoException, OSExistenteException {
+	public static void main(String[] args) throws OSNaoEncontradaException, EquipamentoServicoException, OSExisteException {
 		
-		OrdemDeServico ordemServico = new OrdemDeServico();
+		OrdemDeServico os = new OrdemDeServico();
 		
 		Cliente cli = new Cliente();
 		Equipamento equipamento = new Equipamento();
@@ -25,9 +25,9 @@ public class Demo {
 		ServidorAssisTech servidor = null;
 		servidor = servidor.getInstance();
 		
-		ordemServico.setNumero("123456");
-		ordemServico.setDataEntrada("24/09/2016");
-		ordemServico.setPortador("Josias Miguel");
+		os.setNumero("123456");
+		os.setDataEntrada("24/09/2016");
+		os.setPortador("Josias Miguel");
 		
 		//preenchendo cadastro de cliente
 		cli.setNomeCompleto("José Padilha Almeida Caetano");
@@ -48,14 +48,14 @@ public class Demo {
 		tecnico.setEmail("tec_claudio@diginfo.com.br");
 		
 		
-		ordemServico.setCliente(cli);
-		ordemServico.setEquipamento(equipamento);
-		ordemServico.setTecnicoResponsavel(tecnico);
+		os.setCliente(cli);
+		os.setEquipamento(equipamento);
+		os.setTecnicoResponsavel(tecnico);
 		
-		ordemServico.setCaracteristicasDefeito("Equipamento não liga. Luz Power não acende.");
-		ordemServico.setRelatorioDeManutencao("Equipamento ainda não aberto por um técnico.");
+		os.setCaracteristicasDefeito("Equipamento não liga. Luz Power não acende.");
+		os.setRelatorioDeManutencao("Equipamento ainda não aberto por um técnico.");
 		
-		servidor.cadastrarOrdem(ordemServico);
+		servidor.cadastrarOrdem(os);
 		
 		//servidor.listarOrdens();
 		System.out.println("\n");
@@ -80,10 +80,12 @@ public class Demo {
 			System.out.println(os2);
 		}*/
 		
+		Equipamento equip2 = new Equipamento();
+		os2 = new OrdemDeServico();
+		
 		try {
-			os2 = new OrdemDeServico();
-			Equipamento equip2 = new Equipamento();
-			os2.setNumero("1234569");
+			
+			os2.setNumero("1234567");
 			os2.setDataEntrada("24/09/2016");
 			os2.setPortador("Josias Miguel");
 			
@@ -91,19 +93,34 @@ public class Demo {
 			cli.setEmail("josepad27@yahoo.com.br");
 			cli.setTelefone("3437-4132");
 			
-			//Cadastro do equipamento
 			equip2.setTipo("Computador HP 200 G1 Slim Tower");
+			servidor.validarEquipamento("LW430UA#ABA");
 			equip2.setNumeroSerie("LW430UA#ABA");
 			os2.setEquipamento(equip2);
 			
 			servidor.cadastrarOrdem(os2);
-		} catch(OSExistenteException existeExcept) {
+			
+		} catch(OSExisteException existeExcept) {
+			
 			System.err.println(existeExcept.getMessage());
-		} catch(EquipamentoJahEncaminhadoException equipEmServico) {
+			
+		} catch(EquipamentoServicoException equipEmServico) {
+			
 			System.out.println("cheguei aqui");
 			System.err.print(equipEmServico.getMessage());
-		}
 		
+		}
+	
+				
+		
+		try{ 
+			servidor.procurarEquipamento("LW430UA#ABA");
+			
+		} catch(EquipamentoServicoException equipEmServico) {
+			
+			System.out.println("techo 2");
+			System.err.print(equipEmServico.getMessage());
+		}
 		//System.out.println(cliente);
 		//ServidorAssisTech servidor = new ServidorAssisTech();
 		

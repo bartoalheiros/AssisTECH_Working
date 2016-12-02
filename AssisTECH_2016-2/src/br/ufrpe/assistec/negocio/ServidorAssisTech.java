@@ -53,11 +53,11 @@ public class ServidorAssisTech {
 		 tecnicos.cadastrar(tecnico);
 	 }
 	 
-	 public boolean existeOrdem(OrdemDeServico os) {
+	 public boolean existeOrdem(OrdemDeServico os) throws OSExisteException {
 		 return ordens.existe(os);
 	 }
 	 
-	 public void cadastrarOrdem(OrdemDeServico os) throws OSExistenteException, EquipamentoJahEncaminhadoException {
+	 public void cadastrarOrdem(OrdemDeServico os) throws OSExisteException, EquipamentoServicoException {
 		 ordens.cadastrar(os);
 	 }
 	 
@@ -73,8 +73,16 @@ public class ServidorAssisTech {
 		ordens.listar();
 	}
 	
-	public boolean procurarEquipamento(String serie) {
+	public boolean validarEquipamento(String serie) throws EquipamentoServicoException {
+		return ordens.validarEquipamento(serie);
+	}
+	
+	public boolean procurarEquipamento(String serie) throws EquipamentoServicoException {
 		return ordens.procurarEquipamento(serie);
+	}
+	
+	public void alterar(OrdemDeServico os, String tipo, Object o) throws OSExisteException, EquipamentoServicoException{
+		ordens.alterar(os, tipo, o);
 	}
  
 
