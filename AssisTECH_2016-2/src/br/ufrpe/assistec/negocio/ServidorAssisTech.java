@@ -2,6 +2,7 @@ package br.ufrpe.assistec.negocio;
 
 import br.ufrpe.assistec.dados.OSNaoEncontradaException;
 import br.ufrpe.assistec.negocio.beans.Cliente;
+import br.ufrpe.assistec.negocio.beans.Equipamento;
 import br.ufrpe.assistec.negocio.beans.OrdemDeServico;
 import br.ufrpe.assistec.negocio.beans.Tecnico;
 
@@ -9,6 +10,7 @@ public class ServidorAssisTech {
 	private ControladorClientes clientes;
 	private ControladorTecnicos tecnicos;
 	private ControladorOrdens ordens;
+	private ControladorEquipamentos equipamentos;
 	
 	private static ServidorAssisTech instance;
 	
@@ -17,6 +19,7 @@ public class ServidorAssisTech {
 		this.clientes = new ControladorClientes();
 		this.tecnicos = new ControladorTecnicos();
 		this.ordens = new ControladorOrdens();
+		this.equipamentos = new ControladorEquipamentos();
 	}
 	
 	
@@ -57,7 +60,7 @@ public class ServidorAssisTech {
 		 return ordens.existe(os);
 	 }
 	 
-	 public void cadastrarOrdem(OrdemDeServico os) throws OSExisteException, EquipamentoServicoException {
+	 public void cadastrarOrdem(OrdemDeServico os) throws OSExisteException, EquipamentoEmServicoException {
 		 ordens.cadastrar(os);
 	 }
 	 
@@ -73,15 +76,19 @@ public class ServidorAssisTech {
 		ordens.listar();
 	}
 	
-	public boolean validarEquipamento(String serie) throws EquipamentoServicoException {
+	public void cadastrarEquipamento(Equipamento e) throws EquipamentoExisteException {
+		equipamentos.cadastrar(e);
+	}
+	
+	public boolean validarEquipamento(String serie) throws EquipamentoEmServicoException {
 		return ordens.validarEquipamento(serie);
 	}
 	
-	public boolean procurarEquipamento(String serie) throws EquipamentoServicoException {
+	public boolean procurarEquipamento(String serie) throws EquipamentoEmServicoException {
 		return ordens.procurarEquipamento(serie);
 	}
 	
-	public void alterar(OrdemDeServico os, String tipo, Object o) throws OSExisteException, EquipamentoServicoException{
+	public void alterar(OrdemDeServico os, String tipo, Object o) throws OSExisteException, EquipamentoEmServicoException{
 		ordens.alterar(os, tipo, o);
 	}
  

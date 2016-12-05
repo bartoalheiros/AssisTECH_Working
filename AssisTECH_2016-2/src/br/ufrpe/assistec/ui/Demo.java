@@ -1,6 +1,6 @@
 package br.ufrpe.assistec.ui;
 
-import br.ufrpe.assistec.negocio.EquipamentoServicoException;
+import br.ufrpe.assistec.negocio.EquipamentoEmServicoException;
 import br.ufrpe.assistec.negocio.OSExisteException;
 import br.ufrpe.assistec.negocio.ServidorAssisTech;
 import br.ufrpe.assistec.negocio.beans.Cliente;
@@ -14,7 +14,7 @@ import br.ufrpe.assistec.dados.*;
 
 public class Demo {
 
-	public static void main(String[] args) throws OSNaoEncontradaException, EquipamentoServicoException, OSExisteException {
+	public static void main(String[] args) throws OSNaoEncontradaException, EquipamentoEmServicoException, OSExisteException {
 		
 		OrdemDeServico os = new OrdemDeServico();
 		
@@ -104,7 +104,7 @@ public class Demo {
 			
 			System.err.println(existeExcept.getMessage());
 			
-		} catch(EquipamentoServicoException equipEmServico) {
+		} catch(EquipamentoEmServicoException equipEmServico) {
 			
 			System.out.println("cheguei aqui");
 			System.err.print(equipEmServico.getMessage());
@@ -116,7 +116,7 @@ public class Demo {
 		try{ 
 			servidor.procurarEquipamento("LW430UA#ABA");
 			
-		} catch(EquipamentoServicoException equipEmServico) {
+		} catch(EquipamentoEmServicoException equipEmServico) {
 			
 			System.out.println("techo 2");
 			System.err.print(equipEmServico.getMessage());

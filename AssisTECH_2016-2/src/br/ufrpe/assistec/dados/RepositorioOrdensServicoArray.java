@@ -1,7 +1,7 @@
 
 package br.ufrpe.assistec.dados;
 
-import br.ufrpe.assistec.negocio.EquipamentoServicoException;
+import br.ufrpe.assistec.negocio.EquipamentoEmServicoException;
 import br.ufrpe.assistec.negocio.OSExisteException;
 import br.ufrpe.assistec.negocio.beans.Cliente;
 import br.ufrpe.assistec.negocio.beans.Equipamento;
@@ -80,7 +80,7 @@ public class RepositorioOrdensServicoArray implements IRepositorioOrdensServico 
      * As possibilidades de ele estar cadastrado apenas no sistema, sem estar vinculado a alguma OS, serão tratadas
      * em situações posteriores no código.
 	 * */
-	public boolean validarEquipamento(String serie) throws EquipamentoServicoException {
+	public boolean validarEquipamento(String serie) throws EquipamentoEmServicoException {
 		boolean resultado = false;
 		Equipamento equip = null;
 		String numSerie = null;
@@ -90,7 +90,7 @@ public class RepositorioOrdensServicoArray implements IRepositorioOrdensServico 
 			numSerie = equip.getNumeroSerie();
 			if(numSerie.equals(serie)) {
 				resultado = true;
-				throw new EquipamentoServicoException(serie);
+				throw new EquipamentoEmServicoException(serie);
 			}
 		}
 
@@ -149,7 +149,7 @@ public class RepositorioOrdensServicoArray implements IRepositorioOrdensServico 
 	 * altera um equipamento, cliente ou técnico em uma ordem de serviço. Recebendo a instância da ordem que se quer alterar.
 	 * 
 	 * */
-	public void alterar(OrdemDeServico os, String tipo, Object o) throws EquipamentoServicoException {
+	public void alterar(OrdemDeServico os, String tipo, Object o) throws EquipamentoEmServicoException {
 		
 		switch(tipo) {
 			

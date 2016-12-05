@@ -98,7 +98,7 @@ public class OrdemDeServico {
 
 	public boolean equals(OrdemDeServico ordem) {
 		boolean resultado = false;
-		if(ordem.getNumero().equals(this.numero)) {
+		if(ordem.getNumero() == this.numero) {
 			resultado = true;
 		}
 

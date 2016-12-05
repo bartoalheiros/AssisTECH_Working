@@ -24,10 +24,10 @@ public class ControladorOrdens {
      * @param OrdemDeServico
      * @return void
      * @throws OSExisteException 
-     * @throws EquipamentoServicoException 
+     * @throws EquipamentoEmServicoException 
      *         
      */
-	public void cadastrar(OrdemDeServico os) throws OSExisteException, EquipamentoServicoException {
+	public void cadastrar(OrdemDeServico os) throws OSExisteException, EquipamentoEmServicoException {
         if (os == null) {
             throw new IllegalArgumentException("Parâmetro inválido");
         } else {
@@ -51,15 +51,15 @@ public class ControladorOrdens {
 		this.repositorio.listar();
 	}
 	
-	public boolean validarEquipamento(String serie) throws EquipamentoServicoException {
+	public boolean validarEquipamento(String serie) throws EquipamentoEmServicoException {
 		return this.repositorio.validarEquipamento(serie);
 	}
 	
-	public boolean procurarEquipamento(String serie) throws EquipamentoServicoException {
+	public boolean procurarEquipamento(String serie) throws EquipamentoEmServicoException {
 		return this.repositorio.procurarEquipamento(serie);
 	}
 	
-	public void alterar(OrdemDeServico os, String tipo, Object o) throws EquipamentoServicoException {
+	public void alterar(OrdemDeServico os, String tipo, Object o) throws EquipamentoEmServicoException {
 		if(os == null) {
 			throw new IllegalArgumentException("Os Nula!");
 		} else {
