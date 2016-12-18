@@ -80,12 +80,8 @@ public class ServidorAssisTech {
 		equipamentos.cadastrar(e);
 	}
 	
-	public boolean validarEquipamento(String serie) throws EquipamentoEmServicoException {
-		return ordens.validarEquipamento(serie);
-	}
-	
-	public boolean procurarEquipamento(String serie) throws EquipamentoEmServicoException {
-		return ordens.procurarEquipamento(serie);
+	public Equipamento buscar(String numero) throws EquipamentoNaoExisteException {
+		return equipamentos.buscar(numero);
 	}
 	
 	public void alterar(OrdemDeServico os, String tipo, Object o) throws OSExisteException, EquipamentoEmServicoException{

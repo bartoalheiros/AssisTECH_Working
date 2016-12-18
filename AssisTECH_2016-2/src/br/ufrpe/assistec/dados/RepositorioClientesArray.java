@@ -1,6 +1,7 @@
 package br.ufrpe.assistec.dados;
 
 import br.ufrpe.assistec.negocio.beans.Cliente;
+import br.ufrpe.assistec.negocio.beans.Equipamento;
 
 public class RepositorioClientesArray implements IRepositorioClientes {
 	private Cliente[] clientes;

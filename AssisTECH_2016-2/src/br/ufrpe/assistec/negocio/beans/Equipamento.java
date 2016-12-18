@@ -1,9 +1,22 @@
 package br.ufrpe.assistec.negocio.beans;
 
+
+/*Regrinhas: 1 - se o no da OS for '0' ele não está em NENHUMA OS*/
+
 public class Equipamento {
     private String tipo;
-    private String numeroSerie;
+    private String numSerie;
     private String numOS;
+    
+    public Equipamento(String tipo, String numSerie, String numOS) {
+		this.tipo = tipo;
+		this.numSerie = numSerie;
+		this.numOS = numOS;
+	}
+    
+    public Equipamento() {
+    	
+    }
     
     public String getOs() {
 		return numOS;
@@ -15,24 +28,34 @@ public class Equipamento {
 	public String getTipo() {
 		return tipo;
 	}
+	
 	public void setTipo(String tipo) {
 		this.tipo = tipo;
 	}
 	public String getNumeroSerie() {
-		return numeroSerie;
+		return numSerie;
 	}
 	public void setNumeroSerie(String numeroSerie) {
-		this.numeroSerie = numeroSerie;
+		this.numSerie = numeroSerie;
 	}
 	
     public String toString() {
     	
-    	String resultado = String.format("%7s %5s\n", "Numero de Série: ", this.numeroSerie);
+    	String resultado = String.format("%7s %5s\n", "Numero de Série: ", this.numSerie);
     	resultado += String.format("%6s %5s\n", "Equipamento: ", this.tipo);
-    	resultado += String.format("%4s %5s\n", "Os no: ", this.numOS);
+    	resultado += String.format("%7s %1s\n", "Os no: ", this.numOS);
     	
     	return resultado;
 	}
+    
+    public boolean equals(Equipamento equip) {
+    	boolean resultado = false;
+    	if(this.numSerie.equals(equip.getNumeroSerie())) {
+    		resultado = true;
+    	}
+    	
+    	return resultado;
+    }
     
     
     public static void main(String[] args) {
