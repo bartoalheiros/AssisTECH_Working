@@ -3,9 +3,8 @@ package br.ufrpe.assistec.ui;
 import java.util.Scanner;
 
 import br.ufrpe.assistec.dados.OSNaoEncontradaException;
-import br.ufrpe.assistec.negocio.EquipamentoJahEncaminhadoException;
+import br.ufrpe.assistec.negocio.EquipamentoExisteException;
 import br.ufrpe.assistec.negocio.OSExisteException;
-import br.ufrpe.assistec.negocio.OSExistenteException;
 import br.ufrpe.assistec.negocio.ServidorAssisTech;
 import br.ufrpe.assistec.negocio.beans.Cliente;
 import br.ufrpe.assistec.negocio.beans.Equipamento;
@@ -14,13 +13,12 @@ import br.ufrpe.assistec.negocio.beans.Tecnico;
 
 public class Programa {
 	
-	public static void main(String[] args) throws OSNaoEncontradaException, OSExistenteException, EquipamentoJahEncaminhadoException {
+	public static void main(String[] args) throws OSNaoEncontradaException, OSExisteException {
 		Scanner input = new Scanner(System.in);
 		String entrada = null;
 
 		//MENU
-		ServidorAssisTech servidor = null;
-		servidor = servidor.getInstance();
+		ServidorAssisTech servidor = ServidorAssisTech.getInstance();
 		
 		do{
 			entrada = null; 
@@ -43,7 +41,7 @@ public class Programa {
 
 				case "1":
 					//Dados iniciais
-					OSExisteException osExcept = null;
+					boolean osExcept = false;
 	
 					do{
 						try{
@@ -86,6 +84,27 @@ public class Programa {
 							os.setCliente(cliente);
 							input.nextLine(); //Limpa o buffer do teclado
 							
+							//Cadastrando Equipamento
+							System.out.printf("Dados do equipamento\n\n");
+			
+							System.out.println("Tipo: ");
+							String tipo = input.nextLine();
+							input.nextLine(); //Limpa o buffer do teclado
+							
+							System.out.println("No de Série: ");
+							String numSerie = input.nextLine();
+							input.nextLine(); //Limpa o buffer do teclado
+							
+							System.out.println("OS: ");
+							String osEquip = input.nextLine();
+							input.nextLine(); //Limpa o buffer do teclado
+							
+							//Criando Objeto Equipamento
+							Equipamento equipto = new Equipamento(tipo, numSerie, osEquip);
+							
+							//Cadastrando o Equipamento no Sistema.
+							servidor.cadastrarEquipamento(equipto);
+							
 							//Cadastrando Técnico
 							Tecnico t = new Tecnico();
 							System.out.printf("Informações do Técnico\n\n");
@@ -106,22 +125,15 @@ public class Programa {
 							t.setTelefone(telefoneTecnico);
 			
 							os.setTecnicoResponsavel(t);
-							
-							//Cadastrando Equipamento
-							Equipamento equipto = new Equipamento();
-							System.out.printf("Dados do equipamento\n\n");
-			
-							System.out.println("Tipo: ");
-							String tipo = input.nextLine();
-							input.nextLine(); //Limpa o buffer do teclado
-							equipto.setTipo(tipo);
-			
 	
 						}catch(OSExisteException osExisteExcept) {
 							System.err.println(osExisteExcept.getMessage());
-							osExcept = osExisteExcept;
+							osExcept = true;
+						}catch(EquipamentoExisteException equipExisteExcept) {
+							System.err.println(equipExisteExcept.getMessage());
+							osExcept = true;
 						}
-					}while(osExcept != null);
+					}while(osExcept == true);
 	
 	
 					
@@ -140,7 +152,7 @@ public class Programa {
 	
 							/*O equipamento não é cadastrado em um repositório de equipamentos, por enquanto
 							 * mas ele pertence a uma Ordem.*/
-							check = servidor.validarEquipamento(numSerie);
+							check = servidor.(numSerie);
 							equipto.setNumeroSerie(numSerie);
 							ordem.setEquipamento(equipto);
 	

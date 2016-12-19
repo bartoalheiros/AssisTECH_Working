@@ -8,7 +8,7 @@ public interface IRepositorioEquipamentos {
 	
 	public void listar();
 	
-	public void remover(String numSerie);
+	public void remover(String numSerie) throws EquipamentoNaoExisteException;
 	
 	public Equipamento buscar(String numSerie);
 	

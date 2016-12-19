@@ -36,18 +36,21 @@ public class RepositorioEquipamentosArray implements IRepositorioEquipamentos{
 	}
 
 	@Override
-	public void remover(String numero) {
-		int i = this.procurarIndice(numero);
-		if(i == this.proximo - 1) {
-			this.equipamentos[i] = null;
-			this.proximo = this.proximo - 1;
-			System.out.println("Equipamento removido com sucesso.");
-		}else{
-			this.equipamentos[i] = this.equipamentos[this.proximo - 1];
-			this.equipamentos[this.proximo - 1] = null;
-			this.proximo = this.proximo - 1;
-			System.out.print("Equipamento removido com sucesso.");
-		}
+	public void remover(String numero) throws EquipamentoNaoExisteException {
+		boolean resultado = true;
+		
+			int i = this.procurarIndice(numero);
+			if(i == this.proximo - 1) {
+				this.equipamentos[i] = null;
+				this.proximo = this.proximo - 1;
+				System.out.println("Equipamento removido com sucesso.");
+			}else{
+				this.equipamentos[i] = this.equipamentos[this.proximo - 1];
+				this.equipamentos[this.proximo - 1] = null;
+				this.proximo = this.proximo - 1;
+				System.out.print("Equipamento removido com sucesso.");
+			}
+			
 	}
 	
 	public boolean existe(Equipamento equip) {
@@ -94,22 +97,6 @@ public class RepositorioEquipamentosArray implements IRepositorioEquipamentos{
 		return equip;
 	}
 	
-	/*Este equipamento já está cadastrado em alguma OS?
-	 * Se sim, devolve: o número de série da OS.
-	 * Se não, devolve: 0
-	 * @param: número de série do equipamento.*/
-	public String osEquipamento(String numSerie){
-		String numeroOS;
-		Equipamento equip = new Equipamento();
-		
-		if((equip = this.buscar(numSerie)) == null) {
-			numeroOS = "0";
-		}else{
-			numeroOS = equip.getOs(); 
-		}
-		
-		return numeroOS;
-	}
 	
 	/*
 	 * @param: número de série do equipamento(String).
@@ -140,16 +127,14 @@ public class RepositorioEquipamentosArray implements IRepositorioEquipamentos{
 		return indice;
 	} 
 
+	/**/
+	
 	@Override
 	public void atualizar(Equipamento equip) throws EquipamentoNaoExisteException {
 		int i;
 		
-		if(this.existe(equip)) {
-			i = procurarIndice(equip);
-		} else {
-			throw new EquipamentoNaoExisteException();
-		}
-		
+		i = procurarIndice(equip);
+		this.equipamentos[i] = equip;
 		
 	}
 	

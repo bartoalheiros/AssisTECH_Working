@@ -1,17 +1,18 @@
 package br.ufrpe.assistec.negocio;
 
+import br.ufrpe.assistec.dados.IRepositorioClientes;
 import br.ufrpe.assistec.dados.RepositorioClientesArray;
 import br.ufrpe.assistec.negocio.beans.Cliente;
 
 public class ControladorClientes {
-	private RepositorioClientesArray repositorio;
+	private IRepositorioClientes repositorio;
 
 	public ControladorClientes() {
 		this.repositorio = new RepositorioClientesArray();
 	}
 
 	public boolean existe(Cliente c) {
-		return this.repositorio.existe(c);
+		return ((RepositorioClientesArray)this.repositorio).existe(c);
 	}
 
 	public void cadastrar(Cliente c) {
@@ -30,6 +31,7 @@ public class ControladorClientes {
 	public Cliente buscar(String cpf) {
 		return this.repositorio.buscar(cpf);
 	}
+	
 	
 	
 

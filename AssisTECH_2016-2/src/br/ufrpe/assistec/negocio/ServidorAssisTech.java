@@ -80,13 +80,25 @@ public class ServidorAssisTech {
 		equipamentos.cadastrar(e);
 	}
 	
-	public Equipamento buscar(String numero) throws EquipamentoNaoExisteException {
+	public void removerEquipamento(String numero) throws EquipamentoExisteException, EquipamentoNaoExisteException { 
+		equipamentos.remover(numero);
+	}
+	
+	public void listarEquipamentos() { 
+		equipamentos.listar();
+	}
+	
+	public Equipamento buscarEquipamentos(String numero) throws EquipamentoNaoExisteException {
 		return equipamentos.buscar(numero);
+	}
+	
+	public void atualizarEquipamento(Equipamento equip) throws EquipamentoNaoExisteException { 
+		equipamentos.atualizar(equip);
 	}
 	
 	public void alterar(OrdemDeServico os, String tipo, Object o) throws OSExisteException, EquipamentoEmServicoException{
 		ordens.alterar(os, tipo, o);
 	}
  
-
+	
 }
