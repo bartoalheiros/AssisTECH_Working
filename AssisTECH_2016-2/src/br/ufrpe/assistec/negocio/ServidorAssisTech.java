@@ -1,6 +1,5 @@
 package br.ufrpe.assistec.negocio;
 
-import br.ufrpe.assistec.dados.OSNaoEncontradaException;
 import br.ufrpe.assistec.negocio.beans.Cliente;
 import br.ufrpe.assistec.negocio.beans.Equipamento;
 import br.ufrpe.assistec.negocio.beans.Ordem;
@@ -44,7 +43,7 @@ public class ServidorAssisTech {
 		 return clientes.existe(c);
 	 }
 	 
-	 public Cliente buscarCliente(String cpf) {
+	 public Cliente buscarCliente(String cpf) throws ClienteNaoCadastradoException {
 		 return clientes.buscar(cpf);
 	 }
 	 
@@ -77,11 +76,11 @@ public class ServidorAssisTech {
 	 }
 	 
 	 public Ordem buscarOrdem(String numero) throws OSNaoEncontradaException {
-		return ordens.buscarOrdem(numero);
+		return ordens.buscar(numero);
 	}
 	 
-	 public void removerOS(String numero) {
-		 ordens.removerOS(numero);
+	 public void removerOS(String numero) throws OSNaoEncontradaException {
+		 ordens.remover(numero);
 	}
 	 
 	public void listarOrdens() {
@@ -100,7 +99,7 @@ public class ServidorAssisTech {
 		equipamentos.listar();
 	}
 	
-	public Equipamento buscarEquipamentos(String numero) throws EquipamentoNaoExisteException {
+	public Equipamento buscarEquipamento(String numero) throws EquipamentoNaoExisteException {
 		return equipamentos.buscar(numero);
 	}
 	

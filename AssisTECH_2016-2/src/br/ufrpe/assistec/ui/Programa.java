@@ -2,18 +2,22 @@ package br.ufrpe.assistec.ui;
 
 import java.util.Scanner;
 
-import br.ufrpe.assistec.dados.OSNaoEncontradaException;
+import javax.swing.plaf.synth.SynthSeparatorUI;
+
+import br.ufrpe.assistec.negocio.ClienteJahCadastradoException;
+import br.ufrpe.assistec.negocio.ClienteNaoCadastradoException;
 import br.ufrpe.assistec.negocio.EquipamentoExisteException;
 import br.ufrpe.assistec.negocio.OSExisteException;
+import br.ufrpe.assistec.negocio.OSNaoEncontradaException;
 import br.ufrpe.assistec.negocio.ServidorAssisTech;
 import br.ufrpe.assistec.negocio.beans.Cliente;
 import br.ufrpe.assistec.negocio.beans.Equipamento;
-import br.ufrpe.assistec.negocio.beans.OrdemDeServico;
+import br.ufrpe.assistec.negocio.beans.Ordem;
 import br.ufrpe.assistec.negocio.beans.Tecnico;
 
 public class Programa {
 	
-	public static void main(String[] args) throws OSNaoEncontradaException, OSExisteException {
+	public static void main(String[] args) throws OSNaoEncontradaException, OSExisteException, ClienteJahCadastradoException, ClienteNaoCadastradoException {
 		Scanner input = new Scanner(System.in);
 		String entrada = null;
 
@@ -23,9 +27,11 @@ public class Programa {
 		do{
 			entrada = null; 
 			System.out.println("Escolha a opcao desejada: \n\n");
-			System.out.println("1 - Cadastrar Ordem de Servico\n");
-			System.out.println("2 - Listar Ordens de Servico Cadastradas(Resumo)\n");
-			System.out.println("3 - Listar Ordens de Servico Cadastradas(Por data/prioridade)\n");
+			System.out.println("1 - Nova Ordem\n");
+			System.out.println("2 - Cadastrar Cliente\n");
+			System.out.println("3 - Buscar Cliente\n");
+			System.out.println("4 - Cadastrar Técnico\n");
+			System.out.println("4 - Buscar Técnico\n");
 			//System.out.println("4 - Visualizar uma Ordem de Servico\n");
 			//System.out.println("4 - Fechar Ordem de Servico\n");
 			//System.out.println("5 - Cadastrar Cliente\n");
@@ -40,162 +46,68 @@ public class Programa {
 
 
 				case "1":
-					//Dados iniciais
-					boolean osExcept = false;
-	
-					do{
-						try{
-	
-							OrdemDeServico os = new OrdemDeServico();
-							System.out.println("Número: \n");
-							String n = input.nextLine();
-							input.nextLine(); //Limpa o buffer do teclado
-							os.setNumero(n);
-	
-							System.out.println("Data de Entrada: \n");
-							String data = input.nextLine();
-							os.setDataEntrada(data);
-							input.nextLine(); //Limpa o buffer do teclado
-							
-							//Quem pegou o equipamento, na entrada do mesmo na assitência
-							System.out.println("Portador: \n");
-							String portador = input.nextLine();
-							input.nextLine(); //Limpa o buffer do teclado
-							os.setPortador(portador);
-							
-							/*"Cadastrando" o Cliente
-							 * Associando um Cliente a uma Ordem de Servico*/
-							Cliente cliente = new Cliente();
-							System.out.printf("Dados do Cliente\n\n");
-			
-							System.out.println("Nome: ");
-							String nome = input.nextLine();
-							input.nextLine(); //Limpa o buffer do teclado
-							cliente.setNomeCompleto(nome);
-			
-							System.out.println("Email: ");
-							String email = input.nextLine();
-							input.nextLine(); //Limpa o buffer do teclado
-							cliente.setEmail(email);
-			
-							System.out.println("Telefone: ");
-							String telefone = input.nextLine();
-							cliente.setTelefone(telefone);
-							os.setCliente(cliente);
-							input.nextLine(); //Limpa o buffer do teclado
-							
-							//Cadastrando Equipamento
-							System.out.printf("Dados do equipamento\n\n");
-			
-							System.out.println("Tipo: ");
-							String tipo = input.nextLine();
-							input.nextLine(); //Limpa o buffer do teclado
-							
-							System.out.println("No de Série: ");
-							String numSerie = input.nextLine();
-							input.nextLine(); //Limpa o buffer do teclado
-							
-							System.out.println("OS: ");
-							String osEquip = input.nextLine();
-							input.nextLine(); //Limpa o buffer do teclado
-							
-							//Criando Objeto Equipamento
-							Equipamento equipto = new Equipamento(tipo, numSerie, osEquip);
-							
-							//Cadastrando o Equipamento no Sistema.
-							servidor.cadastrarEquipamento(equipto);
-							
-							//Cadastrando Técnico
-							Tecnico t = new Tecnico();
-							System.out.printf("Informações do Técnico\n\n");
-			
-							System.out.println("Nome Completo: ");
-							String nomeT = input.nextLine();
-							input.nextLine(); //Limpa o buffer do teclado
-							t.setNomeCompleto(nomeT);
-			
-							System.out.println("Email: ");
-							String emailT = input.nextLine();
-							input.nextLine(); //Limpa o buffer do teclado
-							t.setEmail(emailT);
-			
-							System.out.println("Telefone: ");
-							String telefoneTecnico = input.nextLine();
-							input.nextLine(); //Limpa o buffer do teclado
-							t.setTelefone(telefoneTecnico);
-			
-							os.setTecnicoResponsavel(t);
-	
-						}catch(OSExisteException osExisteExcept) {
-							System.err.println(osExisteExcept.getMessage());
-							osExcept = true;
-						}catch(EquipamentoExisteException equipExisteExcept) {
-							System.err.println(equipExisteExcept.getMessage());
-							osExcept = true;
-						}
-					}while(osExcept == true);
-	
-	
+					
 					
 	
-					boolean check = false;
-	
-					do{
-						try{
-	
-							//Cadastro do equipamento
-	
-	
-							System.out.println("No de Série: ");
-							String numSerie = input.nextLine();
-							input.nextLine(); //Limpa o buffer do teclado
-	
-							/*O equipamento não é cadastrado em um repositório de equipamentos, por enquanto
-							 * mas ele pertence a uma Ordem.*/
-							check = servidor.(numSerie);
-							equipto.setNumeroSerie(numSerie);
-							ordem.setEquipamento(equipto);
-	
-						} catch(EquipamentoJahEncaminhadoException equipEmServico) {
-	
-							System.out.println("cheguei aqui");
-							System.err.print(equipEmServico.getMessage());
-	
-						}
-					}while(check == true);
-	
-					//Fim do cadastro do equipamento, continuando a construir a ordem
-	
-					System.out.println("Características do Defeito: ");
-					String caracDefeito = input.nextLine();
-					input.nextLine(); //Limpa o buffer do teclado
-					ordem.setCaracteristicasDefeito(caracDefeito);
-	
-					//Relatório de manutenção
-					System.out.println("Relatório de Manutenção: ");
-					String relatorio = input.nextLine();
-					input.nextLine(); //Limpa o buffer do teclado
-					ordem.setRelatorioDeManutencao(relatorio);
-	
-					//repositorioOS.cadastrar(ordem);
-					servidor.cadastrarOrdem(ordem);
+					
+					
 					break;
 	
 				case "2":
-					OrdemDeServico ordem_2 = new OrdemDeServico();
-					System.out.println("Digite o número da Ordem de Servico: ");
-					String numeroOS = input.nextLine();
+					String var = null;
+					
+					System.out.println("Digite o cpf do cliente: ");
+					var = input.nextLine();
 					input.nextLine(); //Limpa o buffer do teclado
-					ordem_2 = servidor.buscarOrdem(numeroOS);
-					if(ordem_2 != null) {
-						System.out.println(ordem_2);	   
-					}else{
-						System.out.println("Ordem de Servico procurada não existe!");	   
-					}
+					
+					//Criando um cliente, utilizando o Construtor que tem como parâmetro a String cpf.
+					Cliente cli = new Cliente(var);
+					
+					System.out.println("Digite o nome: ");
+					var = input.nextLine();
+					input.nextLine(); //Limpa o buffer do teclado
+					
+					cli.setNomeCompleto(var);
+					
+					System.out.println("Endereço: ");
+					var = input.nextLine();
+					input.nextLine(); //Limpa o buffer do teclado
+					
+					cli.setEndereco(var);
+					
+					System.out.println("Telefone: ");
+					var = input.nextLine();
+					input.nextLine(); //Limpa o buffer do teclado
+					
+					cli.setTelefone(var);
+					
+					System.out.println("E-mail: ");
+					var = input.nextLine();
+					input.nextLine(); //Limpa o buffer do teclado
+					
+					cli.setEmail(var);
+					
+					servidor.cadastrarCliente(cli);
+					
+					System.out.println("Cliente Cadastrado com Sucesso!");
+					
 					break;
 	
 				case "3":
-					servidor.listarOrdens();
+					Cliente cli_2 = new Cliente();
+					String cpf = null;
+					
+					System.out.println("Digite o cpf: ");
+					cpf = input.nextLine();
+					input.nextLine(); //Limpa o buffer do teclado
+					
+					try{
+						cli_2 = servidor.buscarCliente(cpf);
+						System.out.println(cli_2);
+					}catch(ClienteNaoCadastradoException e1) {
+						System.out.println(e1.getMessage());
+					}
+					
 					break;
 	
 				case "4":

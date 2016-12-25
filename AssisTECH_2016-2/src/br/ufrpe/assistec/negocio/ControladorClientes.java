@@ -12,25 +12,33 @@ public class ControladorClientes {
 	}
 
 	public boolean existe(Cliente c) {
-		return ((RepositorioClientesArray)this.repositorio).existe(c);
+		boolean resultado = ((RepositorioClientesArray)this.repositorio).existe(c);
+		
+		return resultado;
 	}
 
 	public void cadastrar(Cliente c) throws ClienteJahCadastradoException {
-		if (c == null) {
-			throw new IllegalArgumentException("Parâmetro Inválido!");
-		} else {
+		if (c != null) {
 			if(!this.existe(c)) {
 				this.repositorio.cadastrar(c);
 			} else {
 				String cpf = c.getCpf();
 				throw new ClienteJahCadastradoException(cpf);
 			} 
+		}else {
+			throw new IllegalArgumentException("Parâmetro inválido");
 		}
 
 	}
 
-	public Cliente buscar(String cpf) {
-		return this.repositorio.buscar(cpf);
+	public Cliente buscar(String cpf) throws ClienteNaoCadastradoException {
+		Cliente cli = this.repositorio.buscar(cpf);
+		
+		if(cli == null) {
+			throw new ClienteNaoCadastradoException(cpf);
+		}
+		
+		return cli;
 	}
 	
 	public void alterar (Cliente c) throws ClienteNaoCadastradoException {

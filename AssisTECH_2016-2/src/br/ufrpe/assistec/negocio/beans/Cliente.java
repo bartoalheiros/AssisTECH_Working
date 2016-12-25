@@ -12,6 +12,10 @@ public class Cliente extends Usuario {
 		this.endereco = endereco;
 	}
 	
+	public Cliente(String cpf) {
+		this.cpf = cpf;
+	}
+	
 	public Cliente () {
 		
 	}

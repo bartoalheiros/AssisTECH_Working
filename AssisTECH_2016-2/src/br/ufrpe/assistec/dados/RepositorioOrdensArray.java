@@ -22,19 +22,18 @@ public class RepositorioOrdensArray implements IRepositorioOrdens {
 		this.proxima++;
 	}
 	
-	public boolean existe(Ordem os) throws OSExisteException {
+	public boolean existe(Ordem os) {
 		boolean resultado = false;
 		for(int i = 0; i < this.proxima; i++) {
 			if(this.ordens[i].getNumero().equals(os.getNumero())) {                 //se o código do livro[i] for igual ao código do livro que passei, resultado = true.
 				resultado = true;
-				throw new OSExisteException();
 			}
 		}
 
 		return resultado;
 	}
 	
-	public Ordem buscar(String numero) throws OSNaoEncontradaException {
+	public Ordem buscar(String numero) {
 		Ordem ordem = null;
 		
 		for(int i = 0; i < this.proxima; i++) {
@@ -42,10 +41,6 @@ public class RepositorioOrdensArray implements IRepositorioOrdens {
 				ordem = new Ordem();
 				ordem = this.ordens[i];
 			}
-		}
-		
-		if(ordem == null) {
-			throw new OSNaoEncontradaException();
 		}
 		
 		return ordem;
@@ -136,9 +131,6 @@ public class RepositorioOrdensArray implements IRepositorioOrdens {
 				indice = i;
 				break;
 			}
-		}
-		if(i == this.proxima) {
-			//IndiceNaoEncontradoException
 		}
 		
 		return indice;

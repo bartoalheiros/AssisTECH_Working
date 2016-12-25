@@ -1,6 +1,5 @@
 package br.ufrpe.assistec.negocio;
 
-import br.ufrpe.assistec.dados.OSNaoEncontradaException;
 import br.ufrpe.assistec.dados.RepositorioOrdensArray;
 import br.ufrpe.assistec.negocio.beans.Ordem;
 
@@ -12,8 +11,16 @@ public class ControladorOrdens {
 		this.repositorio = new RepositorioOrdensArray();
 	}
 	
-	public boolean existe(Ordem os) throws OSExisteException {
-		return this.repositorio.existe(os);
+	public boolean existe(Ordem os) {
+		boolean resultado = false;
+		
+		if(os != null) {
+			resultado = this.repositorio.existe(os);
+		}else {
+			throw new IllegalArgumentException("Parâmetro inválido");
+		}
+		
+		return resultado;
 	}
 	
 
@@ -27,24 +34,36 @@ public class ControladorOrdens {
      * @throws EquipamentoEmServicoException 
      *         
      */
-	public void cadastrar(Ordem os) throws OSExisteException, EquipamentoEmServicoException {
-        if (os == null) {
-            throw new IllegalArgumentException("Parâmetro inválido");
-        } else {
-            if (!this.existe(os)) {
-            	if(!this.procurarEquipamento(os.getEquipamento().getNumeroSerie())) {
-            		this.repositorio.cadastrar(os);
-            	}
-           }
-        }        
-    }
-	
-	public Ordem buscarOrdem(String numero) throws OSNaoEncontradaException {
-		return this.repositorio.buscar(numero);
+	public void cadastrar(Ordem os) throws OSExisteException {
+		if (os != null) {
+			if (!this.existe(os)) {
+				this.repositorio.cadastrar(os);
+			}else {
+				String numero = os.getNumero();
+				throw new OSExisteException(numero);
+			}
+
+		} else {
+			throw new IllegalArgumentException("Parâmetro inválido");
+		}        
 	}
 	
-	public void removerOS(String numero) {
-		this.repositorio.remover(numero);
+	public Ordem buscar(String numero) throws OSNaoEncontradaException {
+		Ordem os = this.repositorio.buscar(numero);
+		
+		if(os == null) {
+			throw new OSNaoEncontradaException(numero);
+		}
+		
+		return os;
+		
+	}
+	
+	public void remover(String numero) throws OSNaoEncontradaException {
+		if(this.buscar(numero) != null){
+			this.repositorio.remover(numero);
+		}
+		
 	}
 	
 	public void listar() {

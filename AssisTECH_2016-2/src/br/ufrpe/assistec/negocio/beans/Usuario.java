@@ -1,10 +1,10 @@
 package br.ufrpe.assistec.negocio.beans;
 
 public class Usuario {
-    private String nomeCompleto;
-    private String email;
-    private String telefone;
-    private int numOrdens;
+    protected String nomeCompleto;
+    protected String email;
+    protected String telefone;
+    protected int numOrdens;
     
     public Usuario(String nomeCompleto, String email, String telefone, int numOrdens) {
     	this.nomeCompleto = nomeCompleto;
