@@ -1,6 +1,5 @@
 package br.ufrpe.assistec.negocio;
 
-import br.ufrpe.assistec.dados.ClienteNaoCadastradoException;
 import br.ufrpe.assistec.dados.IRepositorioClientes;
 import br.ufrpe.assistec.dados.RepositorioClientesArray;
 import br.ufrpe.assistec.negocio.beans.Cliente;

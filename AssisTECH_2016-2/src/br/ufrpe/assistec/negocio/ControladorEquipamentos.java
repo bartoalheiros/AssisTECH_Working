@@ -55,7 +55,7 @@ public class ControladorEquipamentos {
 	}
 	
 	public boolean existeEquipSerie(String numSerie) { 
-		return ((RepositorioEquipamentosArray)this.repositorio).existeEquipSerie(numSerie);
+		return ((RepositorioEquipamentosArray)this.repositorio).existe(numSerie);
 	}
 	
 	public void listar() { 

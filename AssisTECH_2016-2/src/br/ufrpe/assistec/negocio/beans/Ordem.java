@@ -1,6 +1,6 @@
 package br.ufrpe.assistec.negocio.beans;
 
-public class OrdemDeServico {
+public class Ordem {
 
 	private String numero;
 	private Cliente cliente;
@@ -96,7 +96,7 @@ public class OrdemDeServico {
 		this.relatorioDeManutencao = this.relatorioDeManutencao + " " + relatorioDeManutencao; //concatena a String recebida de relatorio e acrescenta à antiga.
 	}
 
-	public boolean equals(OrdemDeServico ordem) {
+	public boolean equals(Ordem ordem) {
 		boolean resultado = false;
 		if(ordem.getNumero() == this.numero) {
 			resultado = true;

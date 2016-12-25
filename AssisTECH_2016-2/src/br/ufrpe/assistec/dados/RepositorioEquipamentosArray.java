@@ -68,7 +68,7 @@ public class RepositorioEquipamentosArray implements IRepositorioEquipamentos{
 		return resultado;
 	}
 	
-	public boolean existeEquipSerie(String numSerie) {
+	public boolean existe(String numSerie) {
 		boolean resultado = false;
 		
 		for(int i = 0; i < this.proximo; i++) {

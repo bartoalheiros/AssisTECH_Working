@@ -15,6 +15,10 @@ public class ControladorTecnicos {
 		return ((RepositorioTecnicosArray)this.repositorio).existe(tecnico);
 	}
 	
+	public Tecnico buscar(String mat){
+		return ((RepositorioTecnicosArray)this.repositorio).buscar(mat); 
+	}
+	
 	public void cadastrar(Tecnico tecnico) {
 		this.repositorio.cadastrar(tecnico);
 	}
@@ -23,6 +27,12 @@ public class ControladorTecnicos {
 		((RepositorioTecnicosArray)this.repositorio).listar();
 	}
 	
-	
+	public void remover(String mat) throws TecnicoNaoCadastradoException { 
+		if(this.buscar(mat) != null) {
+			((RepositorioTecnicosArray)this.repositorio).remover(mat);
+		}else{
+			throw new TecnicoNaoCadastradoException(mat);
+		}
+	}
 	
 }

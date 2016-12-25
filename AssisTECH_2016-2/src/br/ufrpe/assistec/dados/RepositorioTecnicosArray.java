@@ -1,5 +1,7 @@
 package br.ufrpe.assistec.dados;
 
+import br.ufrpe.assistec.negocio.EquipamentoNaoExisteException;
+import br.ufrpe.assistec.negocio.beans.Equipamento;
 import br.ufrpe.assistec.negocio.beans.Tecnico;
 
 public class RepositorioTecnicosArray implements IRepositorioTecnicos {
@@ -23,6 +25,7 @@ public class RepositorioTecnicosArray implements IRepositorioTecnicos {
 		return resultado;
 	}
 	
+	
 	public void cadastrar(Tecnico tecnico) {
 		if(this.existe(tecnico)) {
 			//TecnicoJahExisteException
@@ -41,6 +44,22 @@ public class RepositorioTecnicosArray implements IRepositorioTecnicos {
 			System.out.println("Nenhum tecnico cadastrado.");
 		}
 	}
+	
+	/*buscar: Caso encontre a matrícula procurada, devolve a instância de Tecnico que possue tal matrícula.*/
+	
+	public Tecnico buscar(String mat){
+		Tecnico tec = null;
+		
+		for(int i = 0; i < this.proximo; i++) {
+			if(this.tecnicos[i].getMatricula().equals(mat)) {
+				tec = new Tecnico();
+				tec = this.tecnicos[i];
+			}
+		}
+		
+		return tec;
+	}
+
 	
 	public void remover(String matricula) {
 		int i = this.procurarIndice(matricula);                          //removerCadastro(String cpf) - remove o cadastro do array de clientes, seguindo as regras
@@ -70,5 +89,28 @@ public class RepositorioTecnicosArray implements IRepositorioTecnicos {
 		}
 		
 		return indice;
+	}
+	
+	public int procurarIndice(Tecnico tec) {
+		String mat = tec.getMatricula();
+		int indice = 0, i;
+		
+		for(i = 0; i < this.proximo; i++) { 
+			if( this.tecnicos[i].getMatricula().equals(mat) ) { 
+				indice = i;
+				break;
+			}
+		}
+		
+		return indice;
+	} 
+
+	
+	public void atualizar(Tecnico tec) {
+		int i;
+		
+		i = procurarIndice(tec);
+		this.tecnicos[i] = tec;
+		
 	}
 }

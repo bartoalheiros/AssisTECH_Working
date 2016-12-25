@@ -5,24 +5,24 @@ import br.ufrpe.assistec.negocio.EquipamentoEmServicoException;
 import br.ufrpe.assistec.negocio.OSExisteException;
 import br.ufrpe.assistec.negocio.beans.Cliente;
 import br.ufrpe.assistec.negocio.beans.Equipamento;
-import br.ufrpe.assistec.negocio.beans.OrdemDeServico;
+import br.ufrpe.assistec.negocio.beans.Ordem;
 import br.ufrpe.assistec.negocio.beans.Tecnico;
 
-public class RepositorioOrdensServicoArray implements IRepositorioOrdensServico {
-	private OrdemDeServico[] ordens;
+public class RepositorioOrdensArray implements IRepositorioOrdens {
+	private Ordem[] ordens;
 	private int proxima;
 	
-	public RepositorioOrdensServicoArray() {
-		this.ordens = new OrdemDeServico[100];
+	public RepositorioOrdensArray() {
+		this.ordens = new Ordem[100];
 		this.proxima = 0;
 	}
 	
-	public void cadastrar(OrdemDeServico os) {
+	public void cadastrar(Ordem os) {
 		this.ordens[this.proxima] = os;
 		this.proxima++;
 	}
 	
-	public boolean existe(OrdemDeServico os) throws OSExisteException {
+	public boolean existe(Ordem os) throws OSExisteException {
 		boolean resultado = false;
 		for(int i = 0; i < this.proxima; i++) {
 			if(this.ordens[i].getNumero().equals(os.getNumero())) {                 //se o código do livro[i] for igual ao código do livro que passei, resultado = true.
@@ -34,12 +34,12 @@ public class RepositorioOrdensServicoArray implements IRepositorioOrdensServico 
 		return resultado;
 	}
 	
-	public OrdemDeServico buscar(String numero) throws OSNaoEncontradaException {
-		OrdemDeServico ordem = null;
+	public Ordem buscar(String numero) throws OSNaoEncontradaException {
+		Ordem ordem = null;
 		
 		for(int i = 0; i < this.proxima; i++) {
 			if(this.ordens[i].getNumero().equals(numero)) {
-				ordem = new OrdemDeServico();
+				ordem = new Ordem();
 				ordem = this.ordens[i];
 			}
 		}
@@ -149,7 +149,7 @@ public class RepositorioOrdensServicoArray implements IRepositorioOrdensServico 
 	 * altera um equipamento, cliente ou técnico em uma ordem de serviço. Recebendo a instância da ordem que se quer alterar.
 	 * 
 	 * */
-	public void alterar(OrdemDeServico os, String tipo, Object o) throws EquipamentoEmServicoException {
+	public void alterar(Ordem os, String tipo, Object o) throws EquipamentoEmServicoException {
 		
 		switch(tipo) {
 			

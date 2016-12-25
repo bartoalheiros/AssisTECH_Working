@@ -1,18 +1,18 @@
 package br.ufrpe.assistec.negocio;
 
 import br.ufrpe.assistec.dados.OSNaoEncontradaException;
-import br.ufrpe.assistec.dados.RepositorioOrdensServicoArray;
-import br.ufrpe.assistec.negocio.beans.OrdemDeServico;
+import br.ufrpe.assistec.dados.RepositorioOrdensArray;
+import br.ufrpe.assistec.negocio.beans.Ordem;
 
 
 public class ControladorOrdens {
-	private RepositorioOrdensServicoArray repositorio;
+	private RepositorioOrdensArray repositorio;
 	
 	public ControladorOrdens() {
-		this.repositorio = new RepositorioOrdensServicoArray();
+		this.repositorio = new RepositorioOrdensArray();
 	}
 	
-	public boolean existe(OrdemDeServico os) throws OSExisteException {
+	public boolean existe(Ordem os) throws OSExisteException {
 		return this.repositorio.existe(os);
 	}
 	
@@ -21,13 +21,13 @@ public class ControladorOrdens {
      * Cadastrar uma Ordem de Serviço.
      * A ordem só é cadastrada se ela não existir no repositório: 29 - if(!this.existe(os)) {...} 
      *  
-     * @param OrdemDeServico
+     * @param Ordem
      * @return void
      * @throws OSExisteException 
      * @throws EquipamentoEmServicoException 
      *         
      */
-	public void cadastrar(OrdemDeServico os) throws OSExisteException, EquipamentoEmServicoException {
+	public void cadastrar(Ordem os) throws OSExisteException, EquipamentoEmServicoException {
         if (os == null) {
             throw new IllegalArgumentException("Parâmetro inválido");
         } else {
@@ -39,7 +39,7 @@ public class ControladorOrdens {
         }        
     }
 	
-	public OrdemDeServico buscarOrdem(String numero) throws OSNaoEncontradaException {
+	public Ordem buscarOrdem(String numero) throws OSNaoEncontradaException {
 		return this.repositorio.buscar(numero);
 	}
 	
@@ -59,7 +59,7 @@ public class ControladorOrdens {
 		return this.repositorio.procurarEquipamento(serie);
 	}
 	
-	public void alterar(OrdemDeServico os, String tipo, Object o) throws EquipamentoEmServicoException {
+	public void alterar(Ordem os, String tipo, Object o) throws EquipamentoEmServicoException {
 		if(os == null) {
 			throw new IllegalArgumentException("Os Nula!");
 		} else {

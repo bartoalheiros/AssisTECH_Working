@@ -1,10 +1,9 @@
 package br.ufrpe.assistec.negocio;
 
-import br.ufrpe.assistec.dados.ClienteNaoCadastradoException;
 import br.ufrpe.assistec.dados.OSNaoEncontradaException;
 import br.ufrpe.assistec.negocio.beans.Cliente;
 import br.ufrpe.assistec.negocio.beans.Equipamento;
-import br.ufrpe.assistec.negocio.beans.OrdemDeServico;
+import br.ufrpe.assistec.negocio.beans.Ordem;
 import br.ufrpe.assistec.negocio.beans.Tecnico;
 
 public class ServidorAssisTech {
@@ -69,15 +68,15 @@ public class ServidorAssisTech {
 		 tecnicos.cadastrar(tecnico);
 	 }
 	 
-	 public boolean existeOrdem(OrdemDeServico os) throws OSExisteException {
+	 public boolean existeOrdem(Ordem os) throws OSExisteException {
 		 return ordens.existe(os);
 	 }
 	 
-	 public void cadastrarOrdem(OrdemDeServico os) throws OSExisteException, EquipamentoEmServicoException {
+	 public void cadastrarOrdem(Ordem os) throws OSExisteException, EquipamentoEmServicoException {
 		 ordens.cadastrar(os);
 	 }
 	 
-	 public OrdemDeServico buscarOrdem(String numero) throws OSNaoEncontradaException {
+	 public Ordem buscarOrdem(String numero) throws OSNaoEncontradaException {
 		return ordens.buscarOrdem(numero);
 	}
 	 
@@ -109,7 +108,7 @@ public class ServidorAssisTech {
 		equipamentos.atualizar(equip);
 	}
 	
-	public void alterar(OrdemDeServico os, String tipo, Object o) throws OSExisteException, EquipamentoEmServicoException{
+	public void alterar(Ordem os, String tipo, Object o) throws OSExisteException, EquipamentoEmServicoException{
 		ordens.alterar(os, tipo, o);
 	}
  

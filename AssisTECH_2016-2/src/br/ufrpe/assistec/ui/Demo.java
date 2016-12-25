@@ -5,7 +5,7 @@ import br.ufrpe.assistec.negocio.OSExisteException;
 import br.ufrpe.assistec.negocio.ServidorAssisTech;
 import br.ufrpe.assistec.negocio.beans.Cliente;
 import br.ufrpe.assistec.negocio.beans.Equipamento;
-import br.ufrpe.assistec.negocio.beans.OrdemDeServico;
+import br.ufrpe.assistec.negocio.beans.Ordem;
 import br.ufrpe.assistec.negocio.beans.Tecnico;
 
 import java.util.Scanner;
@@ -16,7 +16,7 @@ public class Demo {
 
 	public static void main(String[] args) throws OSNaoEncontradaException, EquipamentoEmServicoException, OSExisteException {
 		
-		OrdemDeServico os = new OrdemDeServico();
+		Ordem os = new Ordem();
 		
 		Cliente cli = new Cliente();
 		Equipamento equipamento = new Equipamento();
@@ -60,7 +60,7 @@ public class Demo {
 		//servidor.listarOrdens();
 		System.out.println("\n");
 		
-		OrdemDeServico os2 = null;
+		Ordem os2 = null;
 		Scanner input = new Scanner(System.in);
 		
 		/*try{
@@ -81,7 +81,7 @@ public class Demo {
 		}*/
 		
 		Equipamento equip2 = new Equipamento();
-		os2 = new OrdemDeServico();
+		os2 = new Ordem();
 		
 		try {
 			
