@@ -1,7 +1,6 @@
 package br.ufrpe.assistec.dados;
 
 import br.ufrpe.assistec.negocio.beans.Cliente;
-import br.ufrpe.assistec.negocio.beans.Equipamento;
 
 public class RepositorioClientesArray implements IRepositorioClientes {
 	private Cliente[] clientes;
@@ -56,11 +55,26 @@ public class RepositorioClientesArray implements IRepositorioClientes {
 		}
 	}
 	
+	public void alterar(Cliente c) {
+		String cpf = c.getCpf();
+		int i = this.procurarIndice(cpf);
+		this.clientes[i] = c;
+	}
+	
+	/*Verifica se um determinado Cliente já está cadastrado no Sistema.
+	 * @param Cliente
+	 * @returns boolean*/
 	public boolean existe(Cliente cliente) {
 		boolean resultado = false;
+		String cpf1, cpf2;
+		cpf1 = cliente.getCpf();
+		
 		for(int i = 0; i < this.proximo; i++) {
-			if(clientes[i].getCpf().equals(cliente.getCpf())) {                 //achou um cliente no array com o mesmo cpf. Achou o cliente.
-				resultado = true;	
+			cpf2 = clientes[i].getCpf();
+			
+			if(cpf1.equals(cpf2)) {                 //achou um cliente no array com o mesmo cpf. Achou o cliente.
+				resultado = true;
+				break;
 			}
 		}
 

@@ -17,7 +17,7 @@ public class TesteEquipamento {
 		try {
 			servidor.cadastrarEquipamento(equip);
 			servidor.cadastrarEquipamento(equip2);
-			servidor.removerEquipamento("98HX32182");
+			servidor.removerEquipamento("98HX32183");
 		}catch(EquipamentoExisteException e) {
 			System.err.println(e.getMessage());
 			Equipamento equip4 = servidor.buscarEquipamentos(e.getNumSerie());

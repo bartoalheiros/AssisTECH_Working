@@ -32,6 +32,31 @@ public class RepositorioTecnicosArray implements IRepositorioTecnicos {
 		}
 	}
 	
+	public void listar() {
+		if(this.proximo > 0){
+			for(int i = 0; i < this.proximo; i++) {
+				System.out.println(tecnicos[i]);
+			}
+		} else {
+			System.out.println("Nenhum tecnico cadastrado.");
+		}
+	}
+	
+	public void remover(String matricula) {
+		int i = this.procurarIndice(matricula);                          //removerCadastro(String cpf) - remove o cadastro do array de clientes, seguindo as regras
+		if(i == this.proximo - 1) {                                            // 1 -  se o cliente for o último do array, ou seja, se i == this.proximo - 1 
+			this.tecnicos[i] = null;                                           // esta posição recebe null 
+			this.proximo = this.proximo - 1;                                   // o próximo passa a ser ela ou seja: this.proximo = proximo - 1  
+			System.out.print("Técnico Removido com Sucesso.");
+		}else{
+			this.tecnicos[i] = this.tecnicos[this.proximo - 1];                //Se o cliente não for o último do array
+			this.tecnicos[this.proximo -  1] = null;                           //linha 44  o cliente na posição i, que eu encontrei, receberá o cliente da última posição
+			this.proximo = this.proximo - 1;                                   //linha 45 então eu atualizo a última posição para null
+			System.out.print("Técnico Removido com Sucesso.");                 // linha 46 eu atualizo o valor de próxima para próximo - 1 e a última posição passa
+		}		                                                                   // a ser a que era penúltima, anteriormente.
+	}
+		
+	
 	public int procurarIndice(String matr) {
 		int indice = 0, i;
 		for(i = 0; i < this.proximo; i++) { 

@@ -1,5 +1,6 @@
 package br.ufrpe.assistec.negocio;
 
+import br.ufrpe.assistec.dados.ClienteNaoCadastradoException;
 import br.ufrpe.assistec.dados.OSNaoEncontradaException;
 import br.ufrpe.assistec.negocio.beans.Cliente;
 import br.ufrpe.assistec.negocio.beans.Equipamento;
@@ -36,7 +37,7 @@ public class ServidorAssisTech {
 		return instance;
 	}
 	
-	 public void cadastrarCliente(Cliente c) { 
+	 public void cadastrarCliente(Cliente c) throws ClienteJahCadastradoException { 
 		 clientes.cadastrar(c);
 	 }
 	 
@@ -46,6 +47,18 @@ public class ServidorAssisTech {
 	 
 	 public Cliente buscarCliente(String cpf) {
 		 return clientes.buscar(cpf);
+	 }
+	 
+	 public void removerCliente(String cpf) throws ClienteNaoCadastradoException { 
+		 clientes.remover(cpf);
+	 }
+	 
+	 public void alterar (Cliente c) throws ClienteNaoCadastradoException { 
+		 clientes.alterar(c);
+	 }
+	 
+	 public void listarClientes() {
+		 clientes.listar();
 	 }
 	 
 	 public boolean existeTecnico(Tecnico tecnico) {

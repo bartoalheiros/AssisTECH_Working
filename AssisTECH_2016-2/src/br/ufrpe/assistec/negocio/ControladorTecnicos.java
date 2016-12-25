@@ -1,22 +1,28 @@
 package br.ufrpe.assistec.negocio;
 
+import br.ufrpe.assistec.dados.IRepositorioTecnicos;
 import br.ufrpe.assistec.dados.RepositorioTecnicosArray;
 import br.ufrpe.assistec.negocio.beans.Tecnico;
 
 public class ControladorTecnicos {
-	private RepositorioTecnicosArray tecnicos;
+	private IRepositorioTecnicos repositorio;
 	
 	public ControladorTecnicos() {
-		this.tecnicos = new RepositorioTecnicosArray();
+		this.repositorio = new RepositorioTecnicosArray();
 	}
 	
 	public boolean existe(Tecnico tecnico) {
-		return this.tecnicos.existe(tecnico);
+		return ((RepositorioTecnicosArray)this.repositorio).existe(tecnico);
 	}
 	
 	public void cadastrar(Tecnico tecnico) {
-		this.tecnicos.cadastrar(tecnico);
+		this.repositorio.cadastrar(tecnico);
 	}
+	
+	public void listar() { 
+		((RepositorioTecnicosArray)this.repositorio).listar();
+	}
+	
 	
 	
 }
