@@ -4,13 +4,15 @@ public class Usuario {
     protected String nomeCompleto;
     protected String email;
     protected String telefone;
+    protected String endereco;
     protected int numOrdens;
     
-    public Usuario(String nomeCompleto, String email, String telefone, int numOrdens) {
+    public Usuario(String nomeCompleto, String email, String telefone, String endereco, int numOrdens) {
     	this.nomeCompleto = nomeCompleto;
     	this.email = email;
     	this.telefone = telefone;
     	this.numOrdens = numOrdens;
+    	this.endereco = endereco;
     }
    
 	public Usuario(){
@@ -26,7 +28,15 @@ public class Usuario {
 	}
 
     
-    public String getNomeCompleto() {
+    public String getEndereco() {
+		return endereco;
+	}
+
+	public void setEndereco(String endereco) {
+		this.endereco = endereco;
+	}
+
+	public String getNomeCompleto() {
     	return this.nomeCompleto;
     }
     
@@ -64,10 +74,7 @@ public class Usuario {
     }
     
     public static void main(String[] args) {
-    	Usuario u1 = new Usuario("João da Silva Júnior", "joao@gmail.com", "3039-4572", 37);
     	
-    	System.out.println(u1);
-
-	}
+    }
 
 }

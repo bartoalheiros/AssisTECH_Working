@@ -7,9 +7,8 @@ public class Cliente extends Usuario {
 	
     
 	public Cliente(String cpf, String nomeCompleto, String endereco, String telefone, String email, int numOrdens) {
-		super(nomeCompleto, email, telefone, numOrdens);
+		super(nomeCompleto, email, telefone, endereco, numOrdens);
 		this.cpf = cpf;
-		this.endereco = endereco;
 	}
 	
 	public Cliente(String cpf) {
@@ -22,14 +21,6 @@ public class Cliente extends Usuario {
 	
 	public String getCpf() {
 		return this.cpf;
-	}
-	
-	public String getEndereco() {
-		return this.endereco;
-	}
-	
-	public void setEndereco(String endereco) {
-		this.endereco = endereco;
 	}
 	
 	public String toString() {
