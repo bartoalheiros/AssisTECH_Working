@@ -2,7 +2,6 @@ package br.ufrpe.assistec.negocio.beans;
 
 public class Cliente extends Usuario {
 	
-	private String endereco;
 	private String cpf;
 	
     

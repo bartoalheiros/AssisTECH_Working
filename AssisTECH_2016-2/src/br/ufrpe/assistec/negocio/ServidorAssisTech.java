@@ -1,4 +1,5 @@
 package br.ufrpe.assistec.negocio;
+/*Fachada: serve para as classes de UI do sistema terem acesso a todas as funcionalidades do mesmo.*/
 
 import br.ufrpe.assistec.negocio.beans.Cliente;
 import br.ufrpe.assistec.negocio.beans.Equipamento;

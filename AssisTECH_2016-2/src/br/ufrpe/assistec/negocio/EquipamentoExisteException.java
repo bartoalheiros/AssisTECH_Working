@@ -5,7 +5,7 @@ public class EquipamentoExisteException extends Exception {
 	private String numSerie;
 	
 	public EquipamentoExisteException(String numSerie){
-		super("O equipamento que você está tentando cadastrar no sistema, já existe.");
+		super("Impossível cadastrar o equipamento " + numSerie +  " \n Um outro equipamento com o mesmo no de Série já está cadastrado no sistema.");
 		this.numSerie = numSerie;
 	}
 	

@@ -15,7 +15,7 @@ public class Equipamento {
 	}
     
     public Equipamento() {
-    	
+    	this.numOS = "00";
     }
     
     public String getOs() {
