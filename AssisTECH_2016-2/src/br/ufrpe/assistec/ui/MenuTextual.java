@@ -10,6 +10,7 @@ import br.ufrpe.assistec.negocio.ServidorAssisTech;
 import br.ufrpe.assistec.negocio.TecnicoNaoCadastradoException;
 import br.ufrpe.assistec.negocio.beans.Cliente;
 import br.ufrpe.assistec.negocio.beans.Equipamento;
+import br.ufrpe.assistec.negocio.beans.Ordem;
 import br.ufrpe.assistec.negocio.beans.Tecnico;
 import br.ufrpe.assistec.negocio.beans.Usuario;
 
@@ -25,70 +26,36 @@ public class MenuTextual {
 
 		
 		case 1:
-			String var = null;
+			//Cadastrar Cliente
 			
-			System.out.println("Digite o cpf do cliente: ");
-			var = input.nextLine();
-			input.nextLine(); //Limpa o buffer do teclado
-			
-			//Criando um cliente, utilizando o Construtor que tem como par‚metro a String cpf.
-			Cliente cli = new Cliente(var);
-			
-			System.out.println("Digite o nome: ");
-			var = input.nextLine();
-			input.nextLine(); //Limpa o buffer do teclado
-			
-			cli.setNomeCompleto(var);
-			
-			System.out.println("EndereÁo: ");
-			var = input.nextLine();
-			input.nextLine(); //Limpa o buffer do teclado
-			
-			cli.setEndereco(var);
-			
-			System.out.println("Telefone: ");
-			var = input.nextLine();
-			input.nextLine(); //Limpa o buffer do teclado
-			
-			cli.setTelefone(var);
-			
-			System.out.println("E-mail: ");
-			var = input.nextLine();
-			input.nextLine(); //Limpa o buffer do teclado
-			
-			cli.setEmail(var);
-			
-			servidor.cadastrarCliente(cli);
-			
-			System.out.println("Cliente Cadastrado com Sucesso!");
-			
-			break;
-
-		case 2:
-			Cliente cli_2 = new Cliente();
-			String cpf = null;
-			
-			System.out.println("Digite o cpf: ");
-			cpf = input.nextLine();
-			input.nextLine(); //Limpa o buffer do teclado
+			Cliente cli = this.novoCliente();
 			
 			try{
-				cli_2 = servidor.buscarCliente(cpf);
-				System.out.println(cli_2);
-			}catch(ClienteNaoCadastradoException e1) {
-				System.out.println(e1.getMessage());
+				servidor.cadastrarCliente(cli);
+				System.out.println("Cliente Cadastrado com Sucesso!");
+			}catch(ClienteJahCadastradoException e0) {
+				System.err.println(e0.getMessage());
 			}
 			
 			break;
 
+		case 2:
+			//Buscar Cliente
+			
+			this.buscarCliente();
+			
+			break;
+
 		case 3:
+			//Cadastrar T√©cnico
+			
 			String var2 = null;
 			
 			System.out.println("Digite o cpf do tecnico: ");
 			var2 = input.nextLine();
 			input.nextLine(); //Limpa o buffer do teclado
 			
-			//Criando um tecnico, utilizando o Construtor que tem como par‚metro a String matrÌcula.
+			//Criando um tecnico, utilizando o Construtor que tem como par√¢metro a String matr√≠cula.
 			Usuario tec = new Tecnico(var2);
 			
 			System.out.println("Digite o nome: ");
@@ -97,7 +64,7 @@ public class MenuTextual {
 			
 			tec.setNomeCompleto(var2);
 			
-			System.out.println("EndereÁo: ");
+			System.out.println("Endere√ßo: ");
 			var2 = input.nextLine();
 			input.nextLine(); //Limpa o buffer do teclado
 			
@@ -122,10 +89,12 @@ public class MenuTextual {
 			break;
 
 		case 4:
+			//Buscar T√©cnico
+			
 			Usuario tec_2 = new Tecnico();
 			String cpf_2 = null;
 			
-			System.out.println("Digite a matrÌcula do TÈcnico procurado: ");
+			System.out.println("Digite a matr√≠cula do T√©cnico procurado: ");
 			cpf_2 = input.nextLine();
 			input.nextLine(); //Limpa o buffer do teclado
 			
@@ -139,9 +108,11 @@ public class MenuTextual {
 			break;
 		
 		case 5:
+			//Cadastrar Equipamento
+			
 			Equipamento equip = new Equipamento();
 			String var_3 = null;
-			System.out.println("Digite o no de SÈrie: ");
+			System.out.println("Digite o no de S√©rie: ");
 			var_3 = input.nextLine();
 			input.nextLine(); //Limpa o buffer do teclado
 			
@@ -164,19 +135,50 @@ public class MenuTextual {
 			break;
 			
 		case 6:	
+			//Buscar Equipamento
+			
 			Equipamento equip_2 = new Equipamento();
 			String numSerie = null;
 			
-			System.out.println("Digite o n˙mero de SÈrie do equipamento: ");
+			System.out.println("Digite o n√∫mero de S√©rie do equipamento: ");
 			numSerie = input.nextLine();
 			input.nextLine(); //Limpa o buffer do teclado
 			
 			try {
 				equip_2 = servidor.buscarEquipamento(numSerie);
-				System.out.println(equip_2); // caso ele encontre o equipamento. Ele printa o objetio para o usu·rio.
+				System.out.println(equip_2); // caso ele encontre o equipamento. Ele printa o objetio para o usu√°rio.
 			}catch(EquipamentoNaoExisteException e3) {
 				System.out.println(e3.getMessage());
 			}
+			
+			break;
+			
+		case 7:
+			//Nova Ordem
+			
+			Ordem os = new Ordem();
+			System.out.println("OS N√∫mero: \n");
+			String num = input.nextLine();
+			input.nextLine(); //Limpa o buffer do teclado
+			os.setNumero(num);
+
+			System.out.println("Data de Entrada: \n");
+			String data = input.nextLine();
+			os.setDataEntrada(data);
+			input.nextLine(); //Limpa o buffer do teclado
+			
+			System.out.println("Portador: \n");
+			String portador = input.nextLine();
+			input.nextLine(); //Limpa o buffer do teclado
+			os.setPortador(portador);
+			
+			Cliente cliente = this.cadastrarCliente();
+			
+			
+			break;
+			
+		case 8:
+			//Buscar Ordem
 			
 			break;
 			
@@ -186,4 +188,89 @@ public class MenuTextual {
 	}	
 
 	}
+	
+	/*cadastrarCliente():
+	 * 
+	 * Submenu que cadastra um cliente numa ordem*/
+	
+	public Cliente cadastrarCliente() {
+		System.out.println("Deseja criar um novo cadastro de Cliente ou buscar no sistema?");
+		System.out.println("1 - Cadastrar novo Cliente");
+		System.out.println("2 - Utilizar Cliente j√° cadastrado");
+		
+		int opcao = input.nextInt();
+		
+		if(opcao == 1) {
+			Cliente cli = this.novoCliente();
+			
+			try{
+				servidor.cadastrarCliente(cli);
+				System.out.println("Cliente Cadastrado com Sucesso!");
+			}catch(ClienteJahCadastradoException e0) {
+				System.err.println(e0.getMessage());
+			}
+			
+		}else if(opcao == 2) {
+			
+		}else{
+			throw new IllegalArgumentException("Op√ß√£o Inv√°lida!");
+		}
+		return null;
+	}
+	
+	public Cliente novoCliente() {
+		
+		String var = null;
+		
+		System.out.println("Digite o cpf do cliente: ");
+		var = input.nextLine();
+		input.nextLine(); //Limpa o buffer do teclado
+		
+		//Criando um cliente, utilizando o Construtor que tem como par√¢metro a String cpf.
+		Cliente cli = new Cliente(var);
+		
+		System.out.println("Digite o nome: ");
+		var = input.nextLine();
+		input.nextLine(); //Limpa o buffer do teclado
+		
+		cli.setNomeCompleto(var);
+		
+		System.out.println("Endere√ßo: ");
+		var = input.nextLine();
+		input.nextLine(); //Limpa o buffer do teclado
+		
+		cli.setEndereco(var);
+		
+		System.out.println("Telefone: ");
+		var = input.nextLine();
+		input.nextLine(); //Limpa o buffer do teclado
+		
+		cli.setTelefone(var);
+		
+		System.out.println("E-mail: ");
+		var = input.nextLine();
+		input.nextLine(); //Limpa o buffer do teclado
+		
+		cli.setEmail(var);
+	
+		return cli;
+		
+	}
+	
+	public void buscarCliente() {
+
+		Cliente cli_2 = new Cliente();
+		String cpf = null;
+		
+		System.out.println("Digite o cpf: ");
+		cpf = input.nextLine();
+		input.nextLine(); //Limpa o buffer do teclado
+		
+		try{
+			cli_2 = servidor.buscarCliente(cpf);
+			System.out.println(cli_2);
+		}catch(ClienteNaoCadastradoException e1) {
+			System.out.println(e1.getMessage());
+		}
+}
 }
