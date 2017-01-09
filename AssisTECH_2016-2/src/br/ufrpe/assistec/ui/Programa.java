@@ -8,12 +8,7 @@ import br.ufrpe.assistec.negocio.EquipamentoExisteException;
 import br.ufrpe.assistec.negocio.EquipamentoNaoExisteException;
 import br.ufrpe.assistec.negocio.OSExisteException;
 import br.ufrpe.assistec.negocio.OSNaoEncontradaException;
-import br.ufrpe.assistec.negocio.ServidorAssisTech;
-import br.ufrpe.assistec.negocio.TecnicoNaoCadastradoException;
-import br.ufrpe.assistec.negocio.beans.Cliente;
-import br.ufrpe.assistec.negocio.beans.Equipamento;
-import br.ufrpe.assistec.negocio.beans.Tecnico;
-import br.ufrpe.assistec.negocio.beans.Usuario;
+
 
 
 public class Programa {
@@ -29,35 +24,33 @@ public class Programa {
 		do{
 			entrada = 0;
 			System.out.println("=========================================================");
-			System.out.println("Bem vindo a AssisTec. \n Vers„o. 1.0");
+			System.out.println("Bem vindo a AssisTec. \n Vers√£o. 1.0");
 			System.out.println("=========================================================");
 			System.out.println("Escolha a opcao desejada: \n\n");
 			System.out.println("1 - Cadastrar Cliente\n");
 			System.out.println("2 - Buscar Cliente\n");
-			System.out.println("3 - Cadastrar TÈcnico\n");
-			System.out.println("4 - Buscar TÈcnico\n");
+			System.out.println("3 - Cadastrar T√©cnico\n");
+			System.out.println("4 - Buscar T√©cnico\n");
 			System.out.println("5 - Cadastrar Equipamento\n");
 			System.out.println("6 - Buscar Equipamento\n");
-			System.out.println("8 - Nova Ordem\n");
-			System.out.println("9 - Buscar Ordem\n");
-			System.out.println("10 - Sair\n\n");
-			System.out.println("OpÁ„o: "); entrada = input.nextInt(); 
+			System.out.println("7 - Nova Ordem\n");
+			System.out.println("8 - Buscar Ordem\n");
+			System.out.println("9 - Sair\n\n");
+			System.out.println("Op√ß√£o: "); entrada = input.nextInt(); 
 			input.nextLine(); //Limpa o buffer do teclado
 			
-			if(entrada > 10 || entrada == 0) {
-				System.out.println("OpÁ„o inv·lida!");
+			if(entrada > 9 || entrada == 0) {
+				System.out.println("Op√ß√£o inv√°lida!");
 			}
 			
-			menuTextual.MenuPrincipal(entrada);
+			try{
+				menuTextual.MenuPrincipal(entrada);
+			}catch(IllegalArgumentException e1) {
+				System.err.println(e1.getMessage());
+			}
 
 					
-		}while(entrada <= 10);
-
-		System.out.println("Obrigado por utilizar AssisTec!"); 
-        input.close();
-	}
+		}while(entrada < 9);
 
 
-}
-
-
+}}
